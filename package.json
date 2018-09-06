@@ -2,14 +2,43 @@
   "name": "vue-trix",
   "version": "0.1.0",
   "private": true,
+  "main": "./dist/vue-trix.umd.js",
+  "files": [
+    "example/*",
+    "dist/*",
+    "src/*",
+    "*.json",
+    "*.js"
+  ],
+  "homepage": "https://github.com/hanhdt/vue-trix",
+  "bugs": "https://github.com/hanhdt/vue-trix/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanhdt/vue-trix.git"
+  },
+  "author": {
+    "name": "Hanh D. TRAN",
+    "email": "tranduchanh.ms@gmail.com",
+    "url": "https://hanhdt.github.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "trix",
+    "text editor",
+    "vue text editor",
+    "js",
+    "javascript"
+  ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name vue-trix ./src/index.js",
+    "serve": "vue-cli-service serve ./example/main.js --open",
+    "build:example": "vue-cli-service build ./example/main.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "trix": "^0.12.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
@@ -22,7 +51,8 @@
     "babel-jest": "^23.0.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vue": "^2.5.17"
   },
   "eslintConfig": {
     "root": true,
