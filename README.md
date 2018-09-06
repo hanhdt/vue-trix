@@ -6,6 +6,8 @@
 
 [Demo page](/example)
 
+![trix vue](/example/assets/vue-trix-editor.png)
+
 ## Installation
 
 NPM
@@ -63,3 +65,7 @@ Add `VueTrix` component into `*.vue` template
 #### Props descriptions
 
 - `inputId`: This is referenced `id` of the hidden input field defined
+
+## Trix documents
+
+[Full documentation](https://github.com/basecamp/trix#readme)
