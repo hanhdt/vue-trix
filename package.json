@@ -1,6 +1,7 @@
 {
   "name": "vue-trix",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "description": "Trix text editor component for Vue.js",
   "main": "./dist/vue-trix.umd.js",
   "files": [
     "example/*",
