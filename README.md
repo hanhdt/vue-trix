@@ -16,6 +16,12 @@ NPM
   $npm install --save vue-trix
 ```
 
+YARN
+
+```Shell
+  $yarn add vue-trix
+```
+
 ## Mount
 
 ### Mount with global
