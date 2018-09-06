@@ -1,6 +1,6 @@
 {
   "name": "vue-trix",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./dist/vue-trix.umd.js",
   "files": [
     "example/*",
