@@ -1,14 +1,12 @@
-import 'trix'
-import 'trix/dist/trix.css'
+/*
+* Vue-Trix index.js
+* Author: tranduchanh.ms@gmail.com
+* Github: https://github.com/hanhdt/vue-trix
+*/
+
 import Vue from 'vue'
 import VueTrix from './VueTrix.vue'
 
-const Components = {
-  VueTrix
-}
+Vue.component(VueTrix.name, VueTrix)
 
-Object.keys(Components).forEach(name => {
-  Vue.component(name, Components[name])
-})
-
-export default Components
+export default VueTrix

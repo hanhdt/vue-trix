@@ -15,8 +15,13 @@
 </template>
 
 <script>
+import VueTrix from '../../src/VueTrix'
+
 export default {
-  name: 'Editor'
+  name: 'Editor',
+  components: {
+    VueTrix
+  }
 }
 </script>
 
