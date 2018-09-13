@@ -4,7 +4,7 @@
       :input="inputId || randomId"
       class="trix-content"
       ref="trix"
-      @input="update">
+      @trix-change="update">
     </trix-editor>
     <input
       type="hidden"
