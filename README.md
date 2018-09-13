@@ -6,7 +6,7 @@
 
 [Demo page](/example)
 
-![trix vue](/example/assets/vue-trix-editor.png)
+![trix vue](/example/src/assets/vue-trix-editor.png)
 
 ## Installation
 
