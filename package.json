@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-trix ./src/index.js",
-    "serve": "vue-cli-service serve ./example/main.js --open",
+    "serve": "vue-cli-service serve ./example/src/main.js --open",
     "build:example": "vue-cli-service build ./example/main.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"

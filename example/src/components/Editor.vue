@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="editor-wrapper">
-      <h2>Creating an editor</h2>
-      <VueTrix/>
+      <h2>1. Creating an editor</h2>
+      <VueTrix />
     </div>
+    <hr>
     <div class="form-wrapper">
-      <h2>Integrating with Forms</h2>
+      <h2>2. Integrating with Forms</h2>
       <form>
-        <input id="inputTextarea" type="hidden" name="content">
-        <VueTrix inputId="inputTextarea"/>
+        <VueTrix inputId="textarea2" v-model="textareaContent"/>
       </form>
     </div>
   </div>
@@ -19,6 +19,11 @@ import VueTrix from '../../../src/VueTrix'
 
 export default {
   name: 'Editor',
+  data () {
+    return {
+      textareaContent: 'test'
+    }
+  },
   components: {
     VueTrix
   }
