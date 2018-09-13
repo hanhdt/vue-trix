@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="editor-wrapper">
-      <h2>1. Creating an editor</h2>
-      <VueTrix />
+      <h2>1. Creating a simple editor</h2>
+      <VueTrix v-model="content1"/>
     </div>
     <hr>
     <div class="form-wrapper">
       <h2>2. Integrating with Forms</h2>
       <form>
-        <VueTrix inputId="textarea2" v-model="textareaContent"/>
+        <VueTrix inputId="textarea2" v-model="content2"/>
       </form>
     </div>
   </div>
@@ -21,7 +21,8 @@ export default {
   name: 'Editor',
   data () {
     return {
-      textareaContent: 'test'
+      content1: 'content #1',
+      content2: 'content #2'
     }
   },
   components: {

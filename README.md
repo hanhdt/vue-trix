@@ -54,7 +54,7 @@ Add `VueTrix` component into `*.vue` template
 ```html
   <template>
     <!-- ... -->
-    <VueTrix/>
+    <VueTrix v-model="editorContent"/>
     <!-- ... -->
   </template>
 ```
@@ -63,8 +63,7 @@ Add `VueTrix` component into `*.vue` template
 
 ```html
   <form ...>
-    <input id="x" type="hidden" name="content">
-    <VueTrix inputId="x"/>
+    <VueTrix inputId="editor1" v-model="editorContent"/>
   </form>
 ```
 

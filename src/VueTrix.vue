@@ -1,12 +1,16 @@
 <template>
   <div class="trix-container">
     <trix-editor
-      :input="inputId"
+      :input="inputId || randomId"
       class="trix-content"
       ref="trix"
       @input="update">
     </trix-editor>
-    <input type="hidden" :id="inputId" name="content">
+    <input
+      type="hidden"
+      name="content"
+      :id="inputId || randomId"
+      :value.prop="content">
   </div>
 </template>
 
@@ -17,7 +21,7 @@ import 'trix/dist/trix.css'
 export default {
   name: 'VueTrix',
   model: {
-    prop: 'initial',
+    prop: 'content',
     event: 'update'
   },
   props: {
@@ -26,22 +30,30 @@ export default {
       required: false,
       default: ''
     },
-    initial: {
+    content: {
       type: String,
       required: false,
       default: ''
     }
   },
   mounted () {
-    this.$refs.trix.editor.insertHTML(this.initial)
     this.$refs.trix.addEventListener('trix-initialize', this.update)
   },
   methods: {
-    update () {
-      this.$emit('update', this.htmlContent())
-    },
-    htmlContent () {
-      return document.querySelector(`#${this.inputId}`).value
+    update (event) {
+      this.$emit('update', event.currentTarget.value || '')
+    }
+  },
+  computed: {
+    randomId () {
+      let text = ''
+      let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+      for (let i = 0; i < 10; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
+      }
+
+      return text
     }
   }
 }
