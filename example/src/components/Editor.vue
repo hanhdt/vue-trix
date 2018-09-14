@@ -21,7 +21,7 @@ export default {
   name: 'Editor',
   data () {
     return {
-      content1: 'content #1',
+      content1: '',
       content2: 'content #2'
     }
   },

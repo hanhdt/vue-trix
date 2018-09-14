@@ -51,7 +51,7 @@ in the `main.js`, import the package as a global component.
 
 Add `VueTrix` component into `*.vue` template
 
-```html
+```XML
   <template>
     <!-- ... -->
     <VueTrix v-model="editorContent"/>
@@ -61,7 +61,7 @@ Add `VueTrix` component into `*.vue` template
 
 ### Integrating with Forms
 
-```html
+```XML
   <form ...>
     <VueTrix inputId="editor1" v-model="editorContent"/>
   </form>

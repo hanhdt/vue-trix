@@ -10,18 +10,22 @@
       type="hidden"
       name="content"
       :id="inputId || randomId"
-      :value.prop="content">
+      :value.prop="initContent">
   </div>
 </template>
 
 <script>
 import 'trix'
 import 'trix/dist/trix.css'
+import SaveEditorState from './mixins/SaveEditorState'
 
 export default {
   name: 'VueTrix',
+  mixins: [
+    SaveEditorState('VueTrixEditor')
+  ],
   model: {
-    prop: 'content',
+    prop: 'initContent',
     event: 'update'
   },
   props: {
@@ -30,14 +34,11 @@ export default {
       required: false,
       default: ''
     },
-    content: {
+    initContent: {
       type: String,
       required: false,
       default: ''
     }
-  },
-  mounted () {
-    this.$refs.trix.addEventListener('trix-initialize', this.update)
   },
   methods: {
     update (event) {
@@ -52,7 +53,6 @@ export default {
       for (let i = 0; i < 10; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
       }
-
       return text
     }
   }
