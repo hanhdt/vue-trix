@@ -1,6 +1,6 @@
-# Vue-Trix Editor
+# Vue-Trix Text Editor
 
-[Trix](https://www.npmjs.com/package/trix) text editor component for Vue.js
+Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor component for Vue.js
 
 ## Example
 
