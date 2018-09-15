@@ -2,9 +2,7 @@
 
 Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor component for Vue.js
 
-## Example
-
-[Demo page](/example)
+## [Demo page](/example)
 
 ![trix vue](/example/src/assets/vue-trix-editor.png)
 
@@ -21,6 +19,12 @@ YARN
 ```Shell
   $yarn add vue-trix
 ```
+
+## Features
+
+- A simple and lightweight rich-text editor
+- Binding with your `v-model` easily
+- Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving)
 
 ## Mount
 
