@@ -1,14 +1,16 @@
 <template>
   <div class="container">
     <div class="editor-wrapper">
-      <h2>1. Creating a simple editor</h2>
+      <h2>1. A simple text editor</h2>
       <VueTrix v-model="content1"/>
     </div>
     <hr>
     <div class="form-wrapper">
       <h2>2. Integrating with Forms</h2>
       <form>
+        <input type="text" name="title" id="title" placeholder="enter title...">
         <VueTrix inputId="textarea2" v-model="content2"/>
+        <button>Send</button>
       </form>
     </div>
   </div>
@@ -22,7 +24,7 @@ export default {
   data () {
     return {
       content1: '',
-      content2: 'content #2'
+      content2: 'description content'
     }
   },
   components: {
@@ -35,9 +37,24 @@ export default {
 <style scoped lang="scss">
 .container {
   width: 100%;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 .editor-wrapper, .form-wrapper {
   max-width: 700px;
+}
+
+
+input, button {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 10px 0;
+}
+
+button {
+  min-width: 120px;
 }
 </style>
