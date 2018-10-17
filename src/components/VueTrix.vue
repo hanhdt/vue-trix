@@ -17,7 +17,7 @@
 <script>
 import 'trix'
 import 'trix/dist/trix.css'
-import SaveEditorState from './mixins/SaveEditorState'
+import SaveEditorState from '../mixins/SaveEditorState'
 
 export default {
   name: 'VueTrix',
@@ -32,12 +32,16 @@ export default {
     inputId: {
       type: String,
       required: false,
-      default: ''
+      default () {
+        return ''
+      }
     },
     initContent: {
       type: String,
       required: false,
-      default: ''
+      default () {
+        return ''
+      }
     }
   },
   methods: {

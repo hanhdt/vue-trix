@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import VueTrix from '../../../src/VueTrix'
+import VueTrix from '../../../src/components/VueTrix'
 
 export default {
   name: 'Editor',
@@ -42,7 +42,6 @@ export default {
 .editor-wrapper, .form-wrapper {
   max-width: 700px;
 }
-
 
 input, button {
   margin: 10px 0;

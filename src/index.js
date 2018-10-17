@@ -5,7 +5,7 @@
 */
 
 import Vue from 'vue'
-import VueTrix from './VueTrix.vue'
+import VueTrix from './components/VueTrix.vue'
 
 Vue.component(VueTrix.name, VueTrix)
 

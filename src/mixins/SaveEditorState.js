@@ -1,9 +1,10 @@
 /**
- * Persistant editor state
+ * Persist editor's state
  */
 export default function (component) {
   return {
     methods: {
+      // Save editor data with elementId
       saveAllEditorData () {
         localStorage.setItem(this.storageId(), JSON.stringify(this.$refs.trix.editor))
       },
