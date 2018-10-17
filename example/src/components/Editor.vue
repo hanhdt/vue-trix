@@ -2,7 +2,7 @@
   <div class="container">
     <div class="editor-wrapper">
       <h2>1. A simple text editor</h2>
-      <VueTrix v-model="content1"/>
+      <VueTrix v-model="content1" @trix-file-accept="handleFile"/>
     </div>
     <hr>
     <div class="form-wrapper">
@@ -25,6 +25,11 @@ export default {
     return {
       content1: '',
       content2: 'description content'
+    }
+  },
+  methods: {
+    handleFile (file) {
+      console.log('Uploading...', file)
     }
   },
   components: {

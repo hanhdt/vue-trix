@@ -4,7 +4,8 @@
       :input="inputId || randomId"
       class="trix-content"
       ref="trix"
-      @trix-change="update">
+      @trix-change="update"
+      @trix-file-accept="emitHandleFile">
     </trix-editor>
     <input
       type="hidden"
@@ -17,12 +18,14 @@
 <script>
 import 'trix'
 import 'trix/dist/trix.css'
-import SaveEditorState from '../mixins/SaveEditorState'
+import SaveEditorState from '../mixins/SaveEditorState.js'
+import EmitDroppedFile from '../mixins/EmitDroppedFile.js'
 
 export default {
   name: 'VueTrix',
   mixins: [
-    SaveEditorState('VueTrixEditor')
+    SaveEditorState('VueTrixEditor'),
+    EmitDroppedFile('VueTrixEditor')
   ],
   model: {
     prop: 'initContent',
@@ -46,7 +49,7 @@ export default {
   },
   methods: {
     update (event) {
-      this.$emit('update', event.currentTarget.value || '')
+      this.$emit('update', event.srcElement.innerHTML)
     }
   },
   computed: {
