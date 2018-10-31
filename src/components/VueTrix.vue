@@ -16,10 +16,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import 'trix'
 import 'trix/dist/trix.css'
 import SaveEditorState from '../mixins/SaveEditorState.js'
 import EmitDroppedFile from '../mixins/EmitDroppedFile.js'
+Vue.config.ignoredElements = ['trix-editor']
 
 export default {
   name: 'VueTrix',
