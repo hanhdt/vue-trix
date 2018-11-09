@@ -2,7 +2,12 @@
   "name": "vue-trix",
   "version": "0.4.1",
   "description": "Lightweight and simple Trix rich-text editor component for Vue.js",
-  "main": "./dist/vue-trix.umd.js",
+  "main": "dist/vue-trix.umd.js",
+  "module": "dist/vue-trix.esm.js",
+  "unpkg": "dist/vue-trix.min.js",
+  "browser": {
+    "./sfc": "src/components/VueTrix.vue"
+  },
   "files": [
     "example/*",
     "dist/*",
@@ -32,8 +37,11 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-trix ./src/index.js",
-    "serve": "vue-cli-service serve ./example/src/main.js --open",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-trix.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-trix.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-trix.min.js",
     "build:example": "vue-cli-service build ./example/main.js",
+    "serve": "vue-cli-service serve ./example/src/main.js --open",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -51,6 +59,9 @@
     "babel-jest": "^23.6.0",
     "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.9.4",
+    "rollup": "^0.67.0",
+    "rollup-plugin-buble": "^0.19.4",
+    "rollup-plugin-vue": "^4.3.2",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
