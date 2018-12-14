@@ -5,7 +5,8 @@
       class="trix-content"
       ref="trix"
       @trix-change="update"
-      @trix-file-accept="emitHandleFile">
+      @trix-attachment-add="emitAttachmentAdd"
+      @trix-attachment-remove="emitAttachmentRemove">
     </trix-editor>
     <input
       type="hidden"
@@ -20,14 +21,17 @@ import Vue from 'vue'
 import 'trix'
 import 'trix/dist/trix.css'
 import SaveEditorState from '../mixins/SaveEditorState.js'
-import EmitDroppedFile from '../mixins/EmitDroppedFile.js'
+import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
+import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
+
 Vue.config.ignoredElements = ['trix-editor']
 
 export default {
   name: 'VueTrix',
   mixins: [
     SaveEditorState('VueTrixEditor'),
-    EmitDroppedFile('VueTrixEditor')
+    EmitAttachmentAdd('VueTrixEditor'),
+    EmitAttachmentRemove('VueTrixEditor')
   ],
   model: {
     prop: 'initContent',

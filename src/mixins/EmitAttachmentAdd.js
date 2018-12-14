@@ -5,7 +5,7 @@
 export default function (component) {
   return {
     methods: {
-      emitHandleFile (file) {
+      emitAttachmentAdd (file) {
         this.$emit('trix-attachment-add', file)
       }
     }

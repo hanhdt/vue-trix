@@ -2,7 +2,11 @@
   <div class="container">
     <div class="editor-wrapper">
       <h2>1. A simple text editor</h2>
-      <VueTrix v-model="content1" @trix-file-accept="handleFile"/>
+      <VueTrix
+        v-model="content1"
+        @trix-file-accept="handleFile"
+        @trix-attachment-add="handleAttachmentAdd"
+        @trix-attachment-remove="handleAttachmentRemove"/>
     </div>
     <hr>
     <div class="form-wrapper">
@@ -29,7 +33,13 @@ export default {
   },
   methods: {
     handleFile (file) {
-      console.log('Uploading...', file)
+      console.log('Drop file', file)
+    },
+    handleAttachmentAdd (file) {
+      console.log('Upload file:', file)
+    },
+    handleAttachmentRemove (file) {
+      console.log('Remove file:', file)
     }
   },
   components: {
