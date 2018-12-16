@@ -79,6 +79,14 @@ Add `VueTrix` component into `*.vue` template
 
 - `inputId`: This is referenced `id` of the hidden input field defined
 
+### Binding editor changes
+
+The `<VueTrix/>` element emits several events which you can use to observe and respond to changes in editor state.
+
+- `@trix-attachment-add` fires after an attachment is added to the document. You can access the Trix attachment object through the attachment property on the event. If the attachment object has a file property, you should store this file remotely and set the attachment’s URL attribute.
+
+- `@trix-attachment-remove` fires when an attachment is removed from the document. You can access the Trix attachment object through the attachment property on the event. You may wish to use this event to clean up remotely stored files.
+
 ## Trix document
 
 [Full documentation](https://github.com/basecamp/trix#readme)
