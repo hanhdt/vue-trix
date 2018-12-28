@@ -2,6 +2,7 @@
   <div class="trix-container">
     <trix-editor
       :input="inputId || randomId"
+      :placeholder="placeholder"
       class="trix-content"
       ref="trix"
       @trix-change="update"
@@ -39,6 +40,13 @@ export default {
   },
   props: {
     inputId: {
+      type: String,
+      required: false,
+      default () {
+        return ''
+      }
+    },
+    placeholder: {
       type: String,
       required: false,
       default () {
