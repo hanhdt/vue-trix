@@ -1,8 +1,6 @@
-# Vue-Trix Text Editor
+# Vue-Trix Text Editor [![npm](https://img.shields.io/npm/v/vue-trix.svg?style=flat)](https://www.npmjs.com/package/vue-trix) [![Build status](https://ci.appveyor.com/api/projects/status/nffmo893v52evpgm/branch/master?svg=true)](https://ci.appveyor.com/project/tranduchanh/vue-trix/branch/master)
 
-[![npm](https://img.shields.io/npm/v/vue-trix.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-trix)
-
-Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor component for Vue.js
+Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor Vue.js component for writing daily
 
 ## [Sample page](/example)
 
