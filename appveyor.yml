@@ -14,7 +14,3 @@ cache:
   - node_modules -> package-lock.json
 
 build: off
-
-branches:
-  only:
-    - feature/appveyor-ci
