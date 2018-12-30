@@ -43,7 +43,7 @@
     "build:example": "vue-cli-service build ./example/main.js",
     "serve": "vue-cli-service serve ./example/src/main.js --open",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "jest --clearCache && vue-cli-service test:unit"
   },
   "dependencies": {
     "trix": "^1.0.0"
@@ -55,7 +55,7 @@
     "@vue/cli-service": "^3.2.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.27",
-    "babel-core": "^6.0.0",
+    "babel-core": "~7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.11.0",
@@ -103,7 +103,7 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!(babel-jest|jest-vue-preprocessor)/)"
+      "/node_modules/.*"
     ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
