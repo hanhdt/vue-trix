@@ -10,6 +10,9 @@ test_script:
   - npm --version
   - npm run test:unit
 
+cache:
+  - node_modules -> package-lock.json
+
 build: off
 
 branches:
