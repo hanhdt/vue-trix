@@ -69,13 +69,14 @@ Add `VueTrix` component into `*.vue` template
 
 ```XML
   <form ...>
-    <VueTrix inputId="editor1" v-model="editorContent"/>
+    <VueTrix inputId="editor1" v-model="editorContent" placeholder="enter your content..."/>
   </form>
 ```
 
 #### Props descriptions
 
 - `inputId`: This is referenced `id` of the hidden input field defined
+- `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor.
 
 ### Binding editor changes
 
