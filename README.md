@@ -60,7 +60,7 @@ Add `VueTrix` component into `*.vue` template
 ```XML
   <template>
     <!-- ... -->
-    <VueTrix v-model="editorContent"/>
+    <VueTrix v-model="editorContent" placeholder="Enter content" localStorage/>
     <!-- ... -->
   </template>
 ```
@@ -76,7 +76,8 @@ Add `VueTrix` component into `*.vue` template
 #### Props descriptions
 
 - `inputId`: This is referenced `id` of the hidden input field defined
-- `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor.
+- `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor
+- `localStorage`: Boolean attribute allows saving editor state into browser's localStorage
 
 ### Binding editor changes
 
