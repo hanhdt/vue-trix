@@ -4,6 +4,8 @@
       <h2>1. A simple text editor</h2>
       <VueTrix
         v-model="content1"
+        placeholder="Enter your content"
+        localStorage
         @trix-file-accept="handleFile"
         @trix-attachment-add="handleAttachmentAdd"
         @trix-attachment-remove="handleAttachmentRemove"/>

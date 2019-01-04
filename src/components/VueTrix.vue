@@ -1,10 +1,10 @@
 <template>
   <div class="trix-container">
     <trix-editor
-      :input="inputId || randomId"
-      :placeholder="placeholder"
       class="trix-content"
       ref="trix"
+      :input="inputId || randomId"
+      :placeholder="placeholder"
       @trix-change="update"
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove">
@@ -21,7 +21,6 @@
 import Vue from 'vue'
 import 'trix'
 import 'trix/dist/trix.css'
-import SaveEditorState from '../mixins/SaveEditorState.js'
 import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 
@@ -30,7 +29,6 @@ Vue.config.ignoredElements = ['trix-editor']
 export default {
   name: 'VueTrix',
   mixins: [
-    SaveEditorState('VueTrixEditor'),
     EmitAttachmentAdd('VueTrixEditor'),
     EmitAttachmentRemove('VueTrixEditor')
   ],
@@ -59,11 +57,38 @@ export default {
       default () {
         return ''
       }
+    },
+    localStorage: {
+      type: Boolean,
+      required: false,
+      default () {
+        return false
+      }
+    }
+  },
+  mounted () {
+    if (this.localStorage) {
+      const savedValue = localStorage.getItem(this.storageId('VueTrix'))
+      if (savedValue && !this.$props.initContent) {
+        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
+      }
     }
   },
   methods: {
     update (event) {
       this.$emit('update', event.srcElement.innerHTML)
+    },
+    saveEditorState (val) {
+      if (this.localStorage) {
+        localStorage.setItem(this.storageId('VueTrix'), JSON.stringify(this.$refs.trix.editor))
+      }
+    },
+    storageId (component) {
+      if (this.$props.inputId) {
+        return `${component}.${this.$props.inputId}.content`
+      } else {
+        return `${component}.content`
+      }
     }
   },
   computed: {
@@ -75,6 +100,11 @@ export default {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
       }
       return text
+    }
+  },
+  watch: {
+    initContent: {
+      handler: 'saveEditorState'
     }
   }
 }
