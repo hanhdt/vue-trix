@@ -8,6 +8,12 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 
 ![trix vue with form](/example/src/assets/vue-trix-form.png)
 
+## Features
+
+- A simple and lightweight rich-text editor
+- Binding with your `v-model` easily
+- Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving)
+
 ## Installation
 
 NPM
@@ -21,12 +27,6 @@ YARN
 ```Shell
   $yarn add vue-trix
 ```
-
-## Features
-
-- A simple and lightweight rich-text editor
-- Binding with your `v-model` easily
-- Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving)
 
 ## Mount
 
@@ -53,7 +53,7 @@ in the `main.js`, import the package as a global component.
 
 ## Component Usages
 
-### Create a simple editor
+### Create a simple editor in your single component file
 
 Add `VueTrix` component into `*.vue` template
 
@@ -77,7 +77,7 @@ Add `VueTrix` component into `*.vue` template
 
 - `inputId`: This is referenced `id` of the hidden input field defined
 - `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor
-- `localStorage`: Boolean attribute allows saving editor state into browser's localStorage
+- `localStorage`: The boolean attribute allows saving editor state into browser's localStorage
 
 ### Binding editor changes
 
