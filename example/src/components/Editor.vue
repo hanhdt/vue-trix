@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import VueTrix from '../../../src/components/VueTrix'
+import VueTrix from '../../../dist/vue-trix.esm.js'
 
 export default {
   name: 'Editor',

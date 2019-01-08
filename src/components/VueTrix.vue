@@ -18,13 +18,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import 'trix'
 import 'trix/dist/trix.css'
 import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
-
-Vue.config.ignoredElements = ['trix-editor']
 
 export default {
   name: 'VueTrix',
