@@ -26,8 +26,8 @@ import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 export default {
   name: 'VueTrix',
   mixins: [
-    EmitAttachmentAdd('VueTrixEditor'),
-    EmitAttachmentRemove('VueTrixEditor')
+    EmitAttachmentAdd('VueTrix'),
+    EmitAttachmentRemove('VueTrix')
   ],
   model: {
     prop: 'initContent',
