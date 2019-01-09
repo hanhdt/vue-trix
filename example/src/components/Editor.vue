@@ -29,8 +29,8 @@ export default {
   name: 'Editor',
   data () {
     return {
-      content1: '',
-      content2: 'description content'
+      content1: '<h1>here is heading</h1>',
+      content2: '<blockquote>description content</blockquote>'
     }
   },
   methods: {
