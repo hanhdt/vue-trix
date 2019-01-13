@@ -13,7 +13,8 @@
       type="hidden"
       name="content"
       :id="inputId || randomId"
-      :value.prop="initContent">
+      :value.prop="initContent"
+      @input="update">
   </div>
 </template>
 
@@ -69,6 +70,11 @@ export default {
       if (savedValue && !this.$props.initContent) {
         this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
       }
+    }
+  },
+  data () {
+    return {
+      editorContent: this.initContent
     }
   },
   methods: {

@@ -1,32 +1,58 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import VueTrix from '../../src/components/VueTrix.vue'
 
 describe('VueTrix.vue', () => {
   it('renders trix-editor when passed', () => {
-    const component = shallowMount(VueTrix)
+    const wrapper = shallowMount(VueTrix)
 
     // assert the component is rendered
-    expect(component.is(VueTrix)).toBe(true)
-
+    expect(wrapper.is(VueTrix)).toBe(true)
     // assert the trix-editor is rendered
-    expect(component.contains('trix-editor')).toBe(true)
+    expect(wrapper.contains('trix-editor')).toBe(true)
   })
 
   it('init default props', () => {
-    const component = shallowMount(VueTrix)
+    const wrapper = shallowMount(VueTrix, {
+      propsData: {
+        initContent: 'aaa'
+      }
+    })
 
-    // assert props
-    expect(component.props().inputId).toBe('')
-    expect(component.props().initContent).toBe('')
-    expect(component.props().placeholder).toBe('')
+    // assert props correctly
+    expect(wrapper.props().inputId).toBe('')
+    expect(wrapper.props().placeholder).toBe('')
+
+    const inputWrapper = wrapper.find('input')
+    const inputEl = inputWrapper.element
+
+    // Has the connect starting value
+    expect(inputEl.value).toEqual('aaa')
   })
 
   it('have attributes when passed', () => {
-    const component = shallowMount(VueTrix)
+    const wrapper = shallowMount(VueTrix)
 
     // assert attributes
-    expect(component.find('trix-editor').attributes().class).toBe('trix-content')
-    expect(component.find('trix-editor').attributes().role).toBe('textbox')
-    expect(component.find('trix-editor').attributes().placeholder).toBe('')
+    expect(wrapper.find('trix-editor').attributes().class).toBe('trix-content')
+    expect(wrapper.find('trix-editor').attributes().role).toBe('textbox')
+    expect(wrapper.find('trix-editor').attributes().placeholder).toBe('')
+  })
+
+  it('works with v-model', () => {
+    const wrapper = mount(VueTrix, {
+      propsData: {
+        initContent: 'init content'
+      }
+    })
+
+    const inputWrapper = wrapper.find('input')
+    const inputEl = inputWrapper.element
+
+    // Has the connect starting value
+    expect(inputEl.value).toEqual('init content')
+
+    // Sets the input to the correct value when props change
+    wrapper.setProps({ initContent: 'new content' })
+    expect(inputEl.value).toEqual('new content')
   })
 })

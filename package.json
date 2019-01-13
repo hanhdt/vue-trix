@@ -1,6 +1,6 @@
 {
   "name": "vue-trix",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Lightweight and simple Trix rich-text editor component for Vue.js",
   "main": "dist/vue-trix.umd.js",
   "module": "dist/vue-trix.esm.js",
