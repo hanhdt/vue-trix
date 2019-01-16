@@ -8,7 +8,8 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-    '^.+\\.jsx?$': 'babel-jest'
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.js$': 'babel-jest'
   },
   transformIgnorePatterns: [
     '/node_modules/.*'
@@ -22,5 +23,7 @@ module.exports = {
   ],
   testMatch: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
-  ]
+  ],
+  collectCoverage: true,
+  coverageReporters: ['html', 'text-summary']
 }
