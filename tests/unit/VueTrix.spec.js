@@ -2,16 +2,18 @@ import { shallowMount, mount } from '@vue/test-utils'
 import VueTrix from '../../src/components/VueTrix.vue'
 
 describe('VueTrix.vue', () => {
-  it('renders trix-editor when passed', () => {
+  it('renders valid elements', () => {
     const wrapper = shallowMount(VueTrix)
 
     // assert the component is rendered
     expect(wrapper.is(VueTrix)).toBe(true)
     // assert the trix-editor is rendered
     expect(wrapper.contains('trix-editor')).toBe(true)
+    // assert the hidden input is rendered
+    expect(wrapper.contains('input')).toBe(true)
   })
 
-  it('init default props', () => {
+  it('has initial props', () => {
     const wrapper = shallowMount(VueTrix, {
       propsData: {
         initContent: 'aaa'
@@ -38,7 +40,7 @@ describe('VueTrix.vue', () => {
     expect(wrapper.find('trix-editor').attributes().placeholder).toBe('')
   })
 
-  it('works with v-model', () => {
+  it('works with v-model dirrective', () => {
     const wrapper = mount(VueTrix, {
       propsData: {
         initContent: 'init content'
