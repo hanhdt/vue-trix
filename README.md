@@ -73,13 +73,62 @@ Add `VueTrix` component into `*.vue` template
   </form>
 ```
 
-#### Props descriptions
+### Props descriptions
 
 - `inputId`: This is referenced `id` of the hidden input field defined
 - `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor
 - `localStorage`: The boolean attribute allows saving editor state into browser's localStorage
 
-### Binding editor changes
+### Populating editor content
+
+#### Init loading content into the editor
+
+In case, you want to load initial data from database then display into the editor. you can use `v-model` directive with local component's state.
+
+```javascript
+  // Declare local component's state is loaded from database
+  export default {
+    // ...
+    data() {
+      return {
+        editorContent: '<h1>Editor contents</h1>'
+      }
+    }
+    // ...
+  }
+```
+
+```HTML
+  // Assign to v-model directive
+  <template>
+    <!-- ... -->
+    <VueTrix v-model="editorContent"/>
+    <!-- ... -->
+  </template>
+```
+
+#### Track data changes
+
+The local component's state will be changed reactively when you modified contents inside the trix editor UI. Therefore, you need to `watch` the local state for updating content back to database
+
+```javascript
+  export default {
+    // ...
+    methods: {
+      updateEditorContent (value) {
+        // Update new content into the database via state mutations.
+      }
+    },
+    watch: {
+      editorContent: {
+        handler: 'updateEditorContent'
+      }
+    }
+    // ...
+  }
+```
+
+### Binding attachment changes
 
 The `<VueTrix/>` element emits several events which you can use to observe and respond to changes in editor state.
 
