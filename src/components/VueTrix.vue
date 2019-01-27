@@ -7,110 +7,109 @@
       :placeholder="placeholder"
       @trix-change="update"
       @trix-attachment-add="emitAttachmentAdd"
-      @trix-attachment-remove="emitAttachmentRemove">
-    </trix-editor>
+      @trix-attachment-remove="emitAttachmentRemove"
+    ></trix-editor>
     <input
       type="hidden"
-      name="content"
+      :name="inputName"
       :id="inputId || randomId"
       :value.prop="initContent"
-      @input="update">
+      @input="update"
+    >
   </div>
 </template>
 
 <script>
-import 'trix'
-import 'trix/dist/trix.css'
-import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
-import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
+import "trix";
+import "trix/dist/trix.css";
+import EmitAttachmentAdd from "../mixins/EmitAttachmentAdd.js";
+import EmitAttachmentRemove from "../mixins/EmitAttachmentRemove.js";
 
 export default {
-  name: 'VueTrix',
-  mixins: [
-    EmitAttachmentAdd('VueTrix'),
-    EmitAttachmentRemove('VueTrix')
-  ],
+  name: "VueTrix",
+  mixins: [EmitAttachmentAdd("VueTrix"), EmitAttachmentRemove("VueTrix")],
   model: {
-    prop: 'initContent',
-    event: 'update'
+    prop: "initContent",
+    event: "update"
   },
   props: {
     inputId: {
       type: String,
       required: false,
-      default () {
-        return ''
-      }
+      default: ""
+    },
+    inputName: {
+      type: String,
+      required: false,
+      default: "content"
     },
     placeholder: {
       type: String,
       required: false,
-      default () {
-        return ''
-      }
+      default: ""
     },
     initContent: {
       type: String,
       required: false,
-      default () {
-        return ''
-      }
+      default: ""
     },
     localStorage: {
       type: Boolean,
       required: false,
-      default () {
-        return false
-      }
+      default: false
     }
   },
-  mounted () {
+  mounted() {
     if (this.localStorage) {
-      const savedValue = localStorage.getItem(this.storageId('VueTrix'))
+      const savedValue = localStorage.getItem(this.storageId("VueTrix"));
       if (savedValue && !this.$props.initContent) {
-        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
+        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue));
       }
     }
   },
-  data () {
+  data() {
     return {
       editorContent: this.initContent
-    }
+    };
   },
   methods: {
-    update (event) {
-      this.$emit('update', event.srcElement.innerHTML)
+    update(event) {
+      this.$emit("update", event.srcElement.innerHTML);
     },
-    saveEditorState (val) {
+    saveEditorState(val) {
       if (this.localStorage) {
-        localStorage.setItem(this.storageId('VueTrix'), JSON.stringify(this.$refs.trix.editor))
+        localStorage.setItem(
+          this.storageId("VueTrix"),
+          JSON.stringify(this.$refs.trix.editor)
+        );
       }
     },
-    storageId (component) {
+    storageId(component) {
       if (this.$props.inputId) {
-        return `${component}.${this.$props.inputId}.content`
+        return `${component}.${this.$props.inputId}.content`;
       } else {
-        return `${component}.content`
+        return `${component}.content`;
       }
     }
   },
   computed: {
-    randomId () {
-      let text = ''
-      let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    randomId() {
+      let text = "";
+      let possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
       for (let i = 0; i < 10; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length))
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
       }
-      return text
+      return text;
     }
   },
   watch: {
     initContent: {
-      handler: 'saveEditorState'
+      handler: "saveEditorState"
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

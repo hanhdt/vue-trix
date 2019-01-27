@@ -1,4 +1,7 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import {
+  shallowMount,
+  mount
+} from '@vue/test-utils'
 import VueTrix from '../../src/components/VueTrix.vue'
 
 describe('VueTrix.vue', () => {
@@ -21,6 +24,7 @@ describe('VueTrix.vue', () => {
     const wrapper = shallowMount(VueTrix, {
       propsData: {
         inputId: 'inputId',
+        inputName: 'content',
         initContent: 'initContent',
         placeholder: 'placeholder'
       }
@@ -28,6 +32,7 @@ describe('VueTrix.vue', () => {
 
     // assert component props correctly
     expect(wrapper.props().inputId).toBe('inputId')
+    expect(wrapper.props().inputName).toBe('content')
     expect(wrapper.props().placeholder).toBe('placeholder')
     expect(wrapper.props().initContent).toBe('initContent')
   })
@@ -36,6 +41,7 @@ describe('VueTrix.vue', () => {
     const wrapper = mount(VueTrix, {
       propsData: {
         inputId: 'inputId',
+        inputName: 'content',
         initContent: 'initContent',
         placeholder: 'placeholder'
       }
@@ -48,12 +54,14 @@ describe('VueTrix.vue', () => {
     // assert hidden input attributes
     expect(inputEl.value).toEqual('initContent')
     expect(inputEl.id).toEqual('inputId')
+    expect(inputEl.name).toEqual('content')
   })
 
   it('has valid trix-editor attributes', () => {
     const wrapper = mount(VueTrix, {
       propsData: {
         inputId: 'inputId',
+        inputName: 'content',
         initContent: 'initContent',
         placeholder: 'placeholder'
       }
@@ -82,7 +90,9 @@ describe('VueTrix.vue', () => {
     expect(inputEl.value).toEqual('init content')
 
     // Sets the input to the correct value when props change
-    wrapper.setProps({ initContent: 'new content' })
+    wrapper.setProps({
+      initContent: 'new content'
+    })
     expect(inputEl.value).toEqual('new content')
   })
 })

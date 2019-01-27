@@ -35,20 +35,20 @@ YARN
 in the `main.js`, import the package as a global component.
 
 ```javascript
-  import 'vue-trix'
+import "vue-trix";
 ```
 
 ### Mount with component
 
 ```javascript
-  import VueTrix from 'vue-trix'
+import VueTrix from "vue-trix";
 
-  export default {
-    // ...
-    components: {
-      VueTrix
-    }
+export default {
+  // ...
+  components: {
+    VueTrix
   }
+};
 ```
 
 ## Component Usages
@@ -76,6 +76,7 @@ Add `VueTrix` component into `*.vue` template
 ### Props descriptions
 
 - `inputId`: This is referenced `id` of the hidden input field defined
+- `inputName`: This is referenced `name` of the hidden input field defined, default value is `content`
 - `placeholder`: The placeholder attribute specifies a short hint that describes the expected value of a editor
 - `localStorage`: The boolean attribute allows saving editor state into browser's localStorage
 
@@ -86,16 +87,16 @@ Add `VueTrix` component into `*.vue` template
 In case, you want to load initial data from database then display into the editor. you can use `v-model` directive with local component's state.
 
 ```javascript
-  // Declare local component's state is loaded from database
-  export default {
-    // ...
-    data() {
-      return {
-        editorContent: '<h1>Editor contents</h1>'
-      }
-    }
-    // ...
+// Declare local component's state is loaded from database
+export default {
+  // ...
+  data() {
+    return {
+      editorContent: "<h1>Editor contents</h1>"
+    };
   }
+  // ...
+};
 ```
 
 ```HTML
@@ -112,20 +113,20 @@ In case, you want to load initial data from database then display into the edito
 The local component's state will be changed reactively when you modified contents inside the trix editor UI. Therefore, you need to `watch` the local state for updating content back to database
 
 ```javascript
-  export default {
-    // ...
-    methods: {
-      updateEditorContent (value) {
-        // Update new content into the database via state mutations.
-      }
-    },
-    watch: {
-      editorContent: {
-        handler: 'updateEditorContent'
-      }
+export default {
+  // ...
+  methods: {
+    updateEditorContent(value) {
+      // Update new content into the database via state mutations.
     }
-    // ...
+  },
+  watch: {
+    editorContent: {
+      handler: "updateEditorContent"
+    }
   }
+  // ...
+};
 ```
 
 ### Binding attachment changes
