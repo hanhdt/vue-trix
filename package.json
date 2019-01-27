@@ -41,7 +41,7 @@
     "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-trix.min.js",
     "build:example": "vue-cli-service build ./example/src/main.js",
     "serve": "vue-cli-service serve ./example/src/main.js --open",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --fix",
     "test:unit": "jest --clearCache && vue-cli-service test:unit"
   },
   "dependencies": {
