@@ -76,7 +76,7 @@ describe('VueTrix.vue', () => {
     expect(trixWrapper.attributes().placeholder).toBe('placeholder')
   })
 
-  it('works with v-model dirrective', () => {
+  it('works with v-model directive', () => {
     const wrapper = mount(VueTrix, {
       propsData: {
         initContent: 'init content'
