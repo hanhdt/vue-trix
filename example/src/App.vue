@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Vue-Trix editor examples</h1>
-    <Editor name="test"/>
+    <Editor/>
   </div>
 </template>
 
