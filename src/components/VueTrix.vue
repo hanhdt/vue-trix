@@ -29,7 +29,7 @@ export default {
   name: 'VueTrix',
   mixins: [EmitAttachmentAdd('VueTrix'), EmitAttachmentRemove('VueTrix')],
   model: {
-    prop: 'initContent',
+    prop: 'editorContent',
     event: 'update'
   },
   props: {
@@ -62,7 +62,7 @@ export default {
   mounted () {
     if (this.localStorage) {
       const savedValue = localStorage.getItem(this.storageId('VueTrix'))
-      if (savedValue && !this.$props.initContent) {
+      if (savedValue && !this.initContent) {
         this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
       }
     }
@@ -85,8 +85,8 @@ export default {
       }
     },
     storageId (component) {
-      if (this.$props.inputId) {
-        return `${component}.${this.$props.inputId}.content`
+      if (this.inputId) {
+        return `${component}.${this.inputId}.content`
       } else {
         return `${component}.content`
       }
@@ -105,7 +105,7 @@ export default {
     }
   },
   watch: {
-    initContent: {
+    editorContent: {
       handler: 'saveEditorState'
     }
   }
