@@ -3,7 +3,7 @@
     <trix-editor
       class="trix-content"
       ref="trix"
-      :input="inputId || randomId"
+      :input="inputId || generateId"
       :placeholder="placeholder"
       @trix-change="update"
       @trix-attachment-add="emitAttachmentAdd"
@@ -12,7 +12,7 @@
     <input
       type="hidden"
       :name="inputName"
-      :id="inputId || randomId"
+      :id="inputId || generateId"
       :value.prop="initContent"
       @input="update"
     >
@@ -93,15 +93,11 @@ export default {
     }
   },
   computed: {
-    randomId () {
-      let text = ''
-      let possible =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-
-      for (let i = 0; i < 10; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length))
-      }
-      return text
+    generateId() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
+        return v.toString(16)
+      })
     }
   },
   watch: {
