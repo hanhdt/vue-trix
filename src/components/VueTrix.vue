@@ -5,7 +5,7 @@
       ref="trix"
       :input="inputId || generateId"
       :placeholder="placeholder"
-      @trix-change="update"
+      @trix-change="handleContentChange"
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
     ></trix-editor>
@@ -13,8 +13,7 @@
       type="hidden"
       :name="inputName"
       :id="inputId || generateId"
-      :value.prop="initContent"
-      @input="update"
+      :value="editorContent"
     >
   </div>
 </template>
@@ -29,7 +28,7 @@ export default {
   name: 'VueTrix',
   mixins: [EmitAttachmentAdd('VueTrix'), EmitAttachmentRemove('VueTrix')],
   model: {
-    prop: 'editorContent',
+    prop: 'initContent',
     event: 'update'
   },
   props: {
@@ -59,7 +58,7 @@ export default {
       default: false
     }
   },
-  mounted () {
+  created () {
     if (this.localStorage) {
       const savedValue = localStorage.getItem(this.storageId('VueTrix'))
       if (savedValue && !this.initContent) {
@@ -73,16 +72,17 @@ export default {
     }
   },
   methods: {
-    update (event) {
-      this.$emit('update', event.srcElement.innerHTML)
+    handleContentChange (event) {
+      this.editorContent = event.srcElement.innerHTML
     },
-    saveEditorState (val) {
+    emitEditorState (val) {
       if (this.localStorage) {
         localStorage.setItem(
           this.storageId('VueTrix'),
           JSON.stringify(this.$refs.trix.editor)
         )
       }
+      this.$emit('update', this.editorContent)
     },
     storageId (component) {
       if (this.inputId) {
@@ -103,7 +103,7 @@ export default {
   },
   watch: {
     editorContent: {
-      handler: 'saveEditorState'
+      handler: 'emitEditorState'
     }
   }
 }

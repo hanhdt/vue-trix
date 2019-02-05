@@ -87,11 +87,12 @@ describe('VueTrix.vue', () => {
     const inputEl = inputWrapper.element
 
     // Has the connect starting value
+    expect(wrapper.props().initContent).toEqual('init content')
     expect(inputEl.value).toEqual('init content')
 
     // Sets the input to the correct value when props change
-    wrapper.setProps({
-      initContent: 'new content'
+    wrapper.setData({
+      editorContent: 'new content'
     })
     expect(inputEl.value).toEqual('new content')
   })
