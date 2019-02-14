@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     handleContentChange (event) {
-      this.editorContent = event.srcElement.innerHTML
+      this.editorContent = event.srcElement?event.srcElement.innerHTML:event.target.innerHTML
     },
     emitEditorState (val) {
       if (this.localStorage) {
