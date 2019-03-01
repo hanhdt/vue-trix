@@ -6,6 +6,7 @@
       :input="inputId || generateId"
       :placeholder="placeholder"
       @trix-change="handleContentChange"
+      @trix-file-accept="emitFileAccept"
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
     ></trix-editor>
@@ -21,12 +22,13 @@
 <script>
 import 'trix'
 import 'trix/dist/trix.css'
+import EmitFileAccept from '../mixins/EmitFileAccept.js'
 import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 
 export default {
   name: 'VueTrix',
-  mixins: [EmitAttachmentAdd('VueTrix'), EmitAttachmentRemove('VueTrix')],
+  mixins: [EmitFileAccept('VueTrix'), EmitAttachmentAdd('VueTrix'), EmitAttachmentRemove('VueTrix')],
   model: {
     prop: 'initContent',
     event: 'update'

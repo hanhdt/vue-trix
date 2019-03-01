@@ -133,6 +133,8 @@ export default {
 
 The `<VueTrix/>` element emits several events which you can use to observe and respond to changes in editor state.
 
+- `@trix-file-accept` fires before an attachment is added to the document. If you don’t want to accept dropped or pasted files, call preventDefault() on this event.
+
 - `@trix-attachment-add` fires after an attachment is added to the document. You can access the Trix attachment object through the attachment property on the event. If the attachment object has a file property, you should store this file remotely and set the attachment’s URL attribute.
 
 - `@trix-attachment-remove` fires when an attachment is removed from the document. You can access the Trix attachment object through the attachment property on the event. You may wish to use this event to clean up remotely stored files.
