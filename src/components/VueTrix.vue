@@ -28,7 +28,11 @@ import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 
 export default {
   name: 'VueTrix',
-  mixins: [EmitFileAccept('VueTrix'), EmitAttachmentAdd('VueTrix'), EmitAttachmentRemove('VueTrix')],
+  mixins: [
+    EmitFileAccept('VueTrix'),
+    EmitAttachmentAdd('VueTrix'),
+    EmitAttachmentRemove('VueTrix')
+  ],
   model: {
     prop: 'initContent',
     event: 'update'
@@ -37,27 +41,37 @@ export default {
     inputId: {
       type: String,
       required: false,
-      default: ''
+      default () {
+        return ''
+      }
     },
     inputName: {
       type: String,
       required: false,
-      default: 'content'
+      default () {
+        return 'content'
+      }
     },
     placeholder: {
       type: String,
       required: false,
-      default: ''
+      default () {
+        return ''
+      }
     },
     initContent: {
       type: String,
       required: false,
-      default: ''
+      default () {
+        return ''
+      }
     },
     localStorage: {
       type: Boolean,
       required: false,
-      default: false
+      default () {
+        return false
+      }
     }
   },
   created () {
