@@ -1,7 +1,7 @@
 import vue from 'rollup-plugin-vue'
 import replace from 'rollup-plugin-replace'
 import buble from 'rollup-plugin-buble'
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from 'rollup-plugin-commonjs'
 
 const config = require('../package.json')
 
