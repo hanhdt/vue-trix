@@ -24,38 +24,38 @@
 </template>
 
 <script>
-import VueTrix from "../../../dist/vue-trix.esm.js";
+import VueTrix from '../../../dist/vue-trix.esm.js'
 
 export default {
-  name: "Editor",
+  name: 'Editor',
   props: {
     inputName: {
       type: String,
       required: false,
-      default: "content"
+      default: 'content'
     }
   },
-  data() {
+  data () {
     return {
-      content1: "<h1>here is heading</h1>",
-      content2: "<blockquote>description content</blockquote>"
-    };
+      content1: '<h1>here is heading</h1>',
+      content2: '<blockquote>description content</blockquote>'
+    }
   },
   methods: {
-    handleFile(file) {
-      console.log("Drop file", file);
+    handleFile (file) {
+      console.log('Drop file', file)
     },
-    handleAttachmentAdd(file) {
-      console.log("Upload file:", file);
+    handleAttachmentAdd (file) {
+      console.log('Upload file:', file)
     },
-    handleAttachmentRemove(file) {
-      console.log("Remove file:", file);
+    handleAttachmentRemove (file) {
+      console.log('Remove file:', file)
     }
   },
   components: {
     VueTrix
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

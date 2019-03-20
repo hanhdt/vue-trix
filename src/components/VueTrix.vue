@@ -91,6 +91,10 @@ export default {
     handleContentChange (event) {
       this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML
     },
+    handleInitContentChange (newVal, oldVal) {
+      this.editorContent = newVal
+      this.$refs.trix.editor.loadHTML(this.editorContent)
+    },
     emitEditorState (val) {
       if (this.localStorage) {
         localStorage.setItem(
@@ -120,6 +124,9 @@ export default {
   watch: {
     editorContent: {
       handler: 'emitEditorState'
+    },
+    initContent: {
+      handler: 'handleInitContentChange'
     }
   }
 }
