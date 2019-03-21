@@ -10,7 +10,7 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
   },
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/'
+    '<rootDir>/node_modules/*'
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

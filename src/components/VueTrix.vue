@@ -34,7 +34,7 @@ export default {
     EmitAttachmentRemove('VueTrix')
   ],
   model: {
-    prop: 'initContent',
+    prop: 'srcContent',
     event: 'update'
   },
   props: {
@@ -59,7 +59,7 @@ export default {
         return ''
       }
     },
-    initContent: {
+    srcContent: {
       type: String,
       required: false,
       default () {
@@ -75,27 +75,38 @@ export default {
     }
   },
   created () {
+    /* If localStorage is enabled,
+     *  then load editor's content from the beginning
+     */
     if (this.localStorage) {
       const savedValue = localStorage.getItem(this.storageId('VueTrix'))
-      if (savedValue && !this.initContent) {
+      if (savedValue && !this.srcContent) {
         this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
       }
     }
   },
   data () {
     return {
-      editorContent: this.initContent
+      editorContent: this.srcContent
     }
   },
   methods: {
     handleContentChange (event) {
       this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML
     },
-    handleInitContentChange (newVal, oldVal) {
-      this.editorContent = newVal
+    handleInitialContentChange (newContent, oldContent) {
+      // Update editor's content when initial content changed
+      this.editorContent = newContent
       this.$refs.trix.editor.loadHTML(this.editorContent)
+      // Move cursor to end of new content updated
+      let editorLength = this.$refs.trix.editor.getDocument().toString().length
+      this.$refs.trix.editor.setSelectedRange(editorLength - 1)
     },
     emitEditorState (val) {
+      /** 
+       * If localStorage is enabled,
+       * then save editor's content into storage
+       */
       if (this.localStorage) {
         localStorage.setItem(
           this.storageId('VueTrix'),
@@ -119,14 +130,17 @@ export default {
         var v = c === 'x' ? r : (r & 0x3 | 0x8)
         return v.toString(16)
       })
+    },
+    initialContent () {
+      return this.srcContent
     }
   },
   watch: {
     editorContent: {
       handler: 'emitEditorState'
     },
-    initContent: {
-      handler: 'handleInitContentChange'
+    initialContent: {
+      handler: 'handleInitialContentChange'
     }
   }
 }
