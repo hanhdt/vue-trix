@@ -9,6 +9,8 @@
       @trix-file-accept="emitFileAccept"
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
+      @trix-focus="trixFocus"
+      @trix-blur="trixBlur"
     ></trix-editor>
     <input
       type="hidden"
@@ -71,6 +73,20 @@ export default {
       required: false,
       default () {
         return false
+      }
+    },
+    trixFocus:{
+      type: Function,
+      required:false,
+      default:()=>{
+
+      }
+    },
+    trixBlur:{
+      type: Function,
+      required:false,
+      default:()=>{
+
       }
     }
   },
