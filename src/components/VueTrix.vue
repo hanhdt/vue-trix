@@ -77,16 +77,14 @@ export default {
     },
     trixFocus:{
       type: Function,
-      required:false,
-      default:()=>{
-
+      required: false,
+      default: () => {
       }
     },
     trixBlur:{
       type: Function,
-      required:false,
-      default:()=>{
-
+      required: false,
+      default: () => {
       }
     }
   },
