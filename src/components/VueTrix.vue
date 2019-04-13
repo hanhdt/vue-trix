@@ -75,13 +75,13 @@ export default {
         return false
       }
     },
-    trixFocus:{
+    trixFocus: {
       type: Function,
       required: false,
       default: () => {
       }
     },
-    trixBlur:{
+    trixBlur: {
       type: Function,
       required: false,
       default: () => {
@@ -117,7 +117,7 @@ export default {
       this.$refs.trix.editor.setSelectedRange(editorLength - 1)
     },
     emitEditorState (val) {
-      /** 
+      /**
        * If localStorage is enabled,
        * then save editor's content into storage
        */
