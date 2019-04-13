@@ -160,7 +160,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .trix-container {
   max-width: 100%;
   height: auto;
