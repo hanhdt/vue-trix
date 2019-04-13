@@ -40,6 +40,10 @@ export default {
     event: 'update'
   },
   props: {
+    /**
+     * This is referenced `id` of the hidden input field defined.
+     * It is optional and will be a random string by default.
+     */
     inputId: {
       type: String,
       required: false,
@@ -47,6 +51,10 @@ export default {
         return ''
       }
     },
+    /**
+     * This is referenced `name` of the hidden input field defined,
+     * default value is `content`.
+     */
     inputName: {
       type: String,
       required: false,
@@ -54,6 +62,10 @@ export default {
         return 'content'
       }
     },
+    /**
+     * The placeholder attribute specifies a short hint
+     * that describes the expected value of a editor.
+     */
     placeholder: {
       type: String,
       required: false,
@@ -61,6 +73,9 @@ export default {
         return ''
       }
     },
+    /**
+     * The source content is associcated to v-model directive.
+     */
     srcContent: {
       type: String,
       required: false,
@@ -68,6 +83,10 @@ export default {
         return ''
       }
     },
+    /**
+     * The boolean attribute allows saving editor state into browser's localStorage
+     * (optional, default is `false`).
+     */
     localStorage: {
       type: Boolean,
       required: false,
@@ -75,12 +94,18 @@ export default {
         return false
       }
     },
+    /**
+     * The function to call when editor is focused (optional).
+     */
     trixFocus: {
       type: Function,
       required: false,
       default: () => {
       }
     },
+    /**
+     * The function to call when editor goes out of focus (optional).
+     */
     trixBlur: {
       type: Function,
       required: false,
@@ -89,8 +114,9 @@ export default {
     }
   },
   created () {
-    /* If localStorage is enabled,
-     *  then load editor's content from the beginning
+    /** 
+     *  If localStorage is enabled,
+     *  then load editor's content from the beginning.
      */
     if (this.localStorage) {
       const savedValue = localStorage.getItem(this.storageId('VueTrix'))
@@ -138,6 +164,10 @@ export default {
     }
   },
   computed: {
+    /**
+     * Compute a random id of hidden input
+     * when it haven't been specified.
+     */
     generateId () {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
         var r = Math.random() * 16 | 0
@@ -160,7 +190,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 .trix-container {
   max-width: 100%;
   height: auto;
