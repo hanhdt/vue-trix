@@ -21,20 +21,22 @@ describe('VueTrix.vue', () => {
   })
 
   it('has initial props', () => {
-    const wrapper = shallowMount(VueTrix, {
-      propsData: {
-        inputId: 'inputId',
-        inputName: 'content',
-        initContent: 'initContent',
-        placeholder: 'placeholder'
-      }
-    })
+    const propsData = {
+      inputId: 'inputId',
+      inputName: 'content',
+      placeholder: 'placeholder',
+      srcContent: 'srcContent',
+      localStorage: true,
+      trixFocus: () => {},
+      trixBlur: () => {}
+    }
+
+    const wrapper = shallowMount(VueTrix, { propsData })
 
     // assert component props correctly
-    expect(wrapper.props().inputId).toBe('inputId')
-    expect(wrapper.props().inputName).toBe('content')
-    expect(wrapper.props().placeholder).toBe('placeholder')
-    expect(wrapper.props().initContent).toBe('initContent')
+    Object.keys(propsData).forEach(key => {
+      expect(wrapper.props()[key]).toBe(propsData[key])
+    })
   })
 
   it('has valid hidden input', () => {
@@ -42,7 +44,7 @@ describe('VueTrix.vue', () => {
       propsData: {
         inputId: 'inputId',
         inputName: 'content',
-        initContent: 'initContent',
+        srcContent: 'srcContent',
         placeholder: 'placeholder'
       }
     })
@@ -52,7 +54,7 @@ describe('VueTrix.vue', () => {
     const inputEl = inputWrapper.element
 
     // assert hidden input attributes
-    expect(inputEl.value).toEqual('initContent')
+    expect(inputEl.value).toEqual('srcContent')
     expect(inputEl.id).toEqual('inputId')
     expect(inputEl.name).toEqual('content')
   })
@@ -79,7 +81,7 @@ describe('VueTrix.vue', () => {
   it('works with v-model directive', () => {
     const wrapper = mount(VueTrix, {
       propsData: {
-        initContent: 'init content'
+        srcContent: 'init content'
       }
     })
 
@@ -87,7 +89,7 @@ describe('VueTrix.vue', () => {
     const inputEl = inputWrapper.element
 
     // Has the connect starting value
-    expect(wrapper.props().initContent).toEqual('init content')
+    expect(wrapper.props().srcContent).toEqual('init content')
     expect(inputEl.value).toEqual('init content')
 
     // Sets the input to the correct value when props change
