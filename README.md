@@ -147,4 +147,4 @@ The `<VueTrix/>` element emits several events which you can use to observe and r
 
 ## Contributing
 
-If you're interested in contributing to Vue-Trix or share your opinions, please consider to submitting a [**pull request**](https://github.com/hanhdt/vue-trix/pulls) or post [**issues**](https://github.com/hanhdt/vue-trix/issues). I will try to code-self documentation as much as possible.
+If you're interested in contributing to Vue-Trix or share your opinions, please consider to submitting a [**pull request**](https://github.com/hanhdt/vue-trix/pulls) or post [**issues**](https://github.com/hanhdt/vue-trix/issues). Also, I will try to code-self documentation.
