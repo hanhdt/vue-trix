@@ -42,16 +42,16 @@
     "build:example": "vue-cli-service build ./example/src/main.js",
     "serve": "vue-cli-service serve ./example/src/main.js --open",
     "lint": "vue-cli-service lint --fix",
-    "test:unit": "jest --clearCache && vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "trix": "^1.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.5",
-    "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-plugin-unit-jest": "^3.5.3",
-    "@vue/cli-service": "^3.5.3",
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-plugin-eslint": "^3.6.0",
+    "@vue/cli-plugin-unit-jest": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "~7.0.0-bridge.0",
