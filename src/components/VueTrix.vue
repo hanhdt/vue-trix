@@ -25,15 +25,21 @@
 import 'trix'
 import 'trix/dist/trix.css'
 import EmitFileAccept from '../mixins/EmitFileAccept.js'
+import EmitInitialize from '../mixins/EmitInitialize.js'
 import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
+import EmitSelectionChange from '../mixins/EmitSelectionChange.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
+import EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'
 
 export default {
   name: 'VueTrix',
   mixins: [
     EmitFileAccept('VueTrix'),
+    EmitInitialize('VueTrix'),
     EmitAttachmentAdd('VueTrix'),
-    EmitAttachmentRemove('VueTrix')
+    EmitSelectionChange('VueTrix'),
+    EmitAttachmentRemove('VueTrix'),
+    EmitBeforeInitialize('VueTrix')
   ],
   model: {
     prop: 'srcContent',
@@ -114,7 +120,7 @@ export default {
     }
   },
   created () {
-    /** 
+    /**
      *  If localStorage is enabled,
      *  then load editor's content from the beginning.
      */
