@@ -40,7 +40,7 @@
     "build:es": "rollup --config build/rollup.config.es.js",
     "build:unpkg": "rollup --config build/rollup.config.unpkg.js",
     "build:example": "vue-cli-service build ./example/src/main.js",
-    "serve": "vue-cli-service serve ./example/src/main.js --open",
+    "dev": "vue-cli-service serve ./example/src/main.js --open",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
   },

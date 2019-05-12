@@ -144,9 +144,9 @@ export default {
       // Update editor's content when initial content changed
       this.editorContent = newContent
       this.$refs.trix.editor.loadHTML(this.editorContent)
+
       // Move cursor to end of new content updated
-      let editorLength = this.$refs.trix.editor.getDocument().toString().length
-      this.$refs.trix.editor.setSelectedRange(editorLength - 1)
+      this.$refs.trix.editor.setSelectedRange(this.$refs.trix.editor.getDocument().toString().length - 1)
     },
     emitEditorState (val) {
       /**
