@@ -9,6 +9,9 @@
       @trix-file-accept="emitFileAccept"
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
+      @trix-selection-change="emitSelectionChange"
+      @trix-initialize="emitInitialize"
+      @trix-before-initialize="emitBeforeInitialize"
       @trix-focus="trixFocus"
       @trix-blur="trixBlur"
     ></trix-editor>
