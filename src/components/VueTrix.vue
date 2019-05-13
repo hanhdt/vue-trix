@@ -1,6 +1,7 @@
 <template>
   <div class="trix-container">
     <trix-editor
+      contenteditable="true"
       class="trix-content"
       ref="trix"
       :input="inputId || generateId"
@@ -149,7 +150,7 @@ export default {
       this.$refs.trix.editor.loadHTML(this.editorContent)
 
       // Move cursor to end of new content updated
-      this.$refs.trix.editor.setSelectedRange(this.$refs.trix.editor.getDocument().toString().length - 1)
+      this.$refs.trix.editor.setSelectedRange(this.getCurrentPosition())
     },
     emitEditorState (val) {
       /**
@@ -170,6 +171,9 @@ export default {
       } else {
         return `${component}.content`
       }
+    },
+    getCurrentPosition () {
+      return this.$refs.trix.editor.getDocument().toString().length - 1
     }
   },
   computed: {
