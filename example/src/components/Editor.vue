@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     handleFile (file) {
-      console.log('Drop file', file)
+      console.log('Drop file:', file)
     },
     handleAttachmentAdd (file) {
       console.log('Upload file:', file)

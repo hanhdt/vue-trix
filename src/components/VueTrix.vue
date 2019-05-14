@@ -1,5 +1,7 @@
 <template>
-  <div class="trix-container">
+  <div
+    class="trix-container"
+  >
     <trix-editor
       contenteditable="true"
       class="trix-content"
@@ -143,16 +145,17 @@ export default {
   methods: {
     handleContentChange (event) {
       this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML
+      this.$emit('input', this.editorContent)
     },
     handleInitialContentChange (newContent, oldContent) {
-      // Update editor's content when initial content changed
-      this.editorContent = newContent
-      this.$refs.trix.editor.loadHTML(this.editorContent)
+      newContent = newContent === undefined ? '' : newContent
 
-      // Move cursor to end of new content updated
-      this.$refs.trix.editor.setSelectedRange(this.getCurrentPosition())
+      if (this.$refs.trix.editor.innerHTML !== newContent) {
+        // Update editor's content when initial content changed
+        this.editorContent = newContent
+      }
     },
-    emitEditorState (val) {
+    emitEditorState (value) {
       /**
        * If localStorage is enabled,
        * then save editor's content into storage
@@ -172,7 +175,14 @@ export default {
         return `${component}.content`
       }
     },
-    getCurrentPosition () {
+    reloadEditorContent (newContent) {
+      // Reload HTML content
+      this.$refs.trix.editor.loadHTML(newContent)
+
+      // Move cursor to end of new content updated
+      this.$refs.trix.editor.setSelectedRange(this.getContentEndPosition())
+    },
+    getContentEndPosition () {
       return this.$refs.trix.editor.getDocument().toString().length - 1
     }
   },
