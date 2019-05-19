@@ -4,9 +4,7 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 
 ## [Sample page](/example)
 
-![trix vue](/example/src/assets/vue-trix-simple.png)
-
-![trix vue with form](/example/src/assets/vue-trix-form.png)
+![trix vue editor](/example/src/assets/vue-trix-editor.png)
 
 ## Features
 
