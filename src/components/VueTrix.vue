@@ -1,6 +1,6 @@
 <template>
   <div
-    class="trix-container"
+    :class="$style.trix_container"
   >
     <trix-editor
       contenteditable="true"
@@ -213,9 +213,15 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-.trix-container {
+<style lang="css" module>
+.trix_container {
   max-width: 100%;
   height: auto;
+}
+.trix_container .trix-button-group {
+  background-color: white;
+}
+.trix_container .trix-content {
+  background-color: white;
 }
 </style>
