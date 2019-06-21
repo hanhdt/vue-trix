@@ -9,7 +9,7 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 ## Features
 
 - A simple and lightweight rich-text editor
-- Binding with your `v-model` easily
+- Binding with `v-model` easily
 - Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving)
 
 ## Installation
