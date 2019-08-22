@@ -1,7 +1,5 @@
 <template>
-  <div
-    :class="[$style.trix_container]"
-  >
+  <div :class="[$style.trix_container]">
     <trix-editor
       :contenteditable="!disabledEditor"
       :class="['trix-content']"
@@ -240,8 +238,5 @@ export default {
 }
 .trix_container .trix-content {
   background-color: white;
-}
-.disabled_editor {
-  pointer-events: none;
 }
 </style>
