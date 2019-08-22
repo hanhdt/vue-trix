@@ -28,6 +28,9 @@ import VueTrix from '../../../dist/vue-trix.esm.js'
 
 export default {
   name: 'Editor',
+  components: {
+    VueTrix
+  },
   props: {
     inputName: {
       type: String,
@@ -38,7 +41,8 @@ export default {
   data () {
     return {
       content1: '<h1>here is heading</h1>',
-      content2: '<blockquote>description content</blockquote>'
+      content2: '<blockquote>description content</blockquote>',
+      content3: '<h1>Hello world!</h1>'
     }
   },
   methods: {
@@ -52,8 +56,13 @@ export default {
       console.log('Remove file:', file)
     }
   },
-  components: {
-    VueTrix
+  watch: {
+    content3 (value) {
+      value = value === undefined ? '' : value
+      if (this.$refs.trix.innerHTML !== value) {
+        this.$refs.trix.editor.loadHTML(value)
+      }
+    }
   }
 }
 </script>

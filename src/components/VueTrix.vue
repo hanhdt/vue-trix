@@ -1,10 +1,10 @@
 <template>
   <div
-    :class="$style.trix_container"
+    :class="[$style.trix_container]"
   >
     <trix-editor
-      contenteditable="true"
-      class="trix-content"
+      :contenteditable="!disabledEditor"
+      :class="['trix-content']"
       ref="trix"
       :input="inputId || generateId"
       :placeholder="placeholder"
@@ -17,7 +17,7 @@
       @trix-before-initialize="emitBeforeInitialize"
       @trix-focus="trixFocus"
       @trix-blur="trixBlur"
-    ></trix-editor>
+    />
     <input
       type="hidden"
       :name="inputName"
@@ -52,6 +52,16 @@ export default {
     event: 'update'
   },
   props: {
+    /** 
+     * This prop will put the editor in read-only mode
+     */
+    disabledEditor: {
+      type: Boolean,
+      required: false,
+      default () {
+        return false
+      }
+    },
     /**
      * This is referenced `id` of the hidden input field defined.
      * It is optional and will be a random string by default.
@@ -135,6 +145,13 @@ export default {
       if (savedValue && !this.srcContent) {
         this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
       }
+    }
+  },
+  mounted () {
+    /** Disable toolbar and editor by pointer events styling */
+    if (this.disabledEditor) {
+      document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
+      document.querySelector('trix-editor').style['pointer-events'] = 'none'
     }
   },
   data () {
@@ -223,5 +240,8 @@ export default {
 }
 .trix_container .trix-content {
   background-color: white;
+}
+.disabled_editor {
+  pointer-events: none;
 }
 </style>
