@@ -146,11 +146,8 @@ export default {
     }
   },
   mounted () {
-    /** Disable toolbar and editor by pointer events styling */
-    if (this.disabledEditor) {
-      document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
-      document.querySelector('trix-editor').style['pointer-events'] = 'none'
-    }
+    /** Check if editor read-only mode is required */
+    this.decorateDisabledEditor()
   },
   data () {
     return {
@@ -199,6 +196,14 @@ export default {
     },
     getContentEndPosition () {
       return this.$refs.trix.editor.getDocument().toString().length - 1
+    },
+    decorateDisabledEditor () {
+      /** Disable toolbar and editor by pointer events styling */
+      if (this.disabledEditor) {
+        document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
+        document.querySelector('trix-editor').style['pointer-events'] = 'none'
+        document.querySelector('trix-editor').style['background'] = '#ecf0f1'
+      }
     }
   },
   computed: {

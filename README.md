@@ -80,6 +80,7 @@ Add `VueTrix` component into `*.vue` template
 - `inputId`: This is referenced `id` of the hidden input field defined, it is optional.
 - `inputName`: This is referenced `name` of the hidden input field defined, default value is `content`.
 - `placeholder`: The placeholder option attribute specifies a short hint that describes the expected value of a editor.
+- `disabledEditor`: This prop will put the editor in read-only mode.
 - `localStorage`: The boolean attribute allows saving editor state into browser's localStorage (optional, default is `false`).
 - `trixFocus`: The function to call when editor is focused (optional).
 - `trixBlur`: The function to call when editor goes out of focus (optional).
