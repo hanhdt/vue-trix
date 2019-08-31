@@ -9,6 +9,8 @@
         @trix-file-accept="handleFile"
         @trix-attachment-add="handleAttachmentAdd"
         @trix-attachment-remove="handleAttachmentRemove"
+        @trix-focus="handleEditorFocus"
+        @trix-blur="handleEditorBlur"
       />
     </div>
     <hr>
@@ -54,6 +56,12 @@ export default {
     },
     handleAttachmentRemove (file) {
       console.log('Remove file:', file)
+    },
+    handleEditorFocus (event) {
+      console.log('Editor is focused:', event)
+    },
+    handleEditorBlur (event) {
+      console.log('Editor is lost focus', event)
     }
   },
   watch: {

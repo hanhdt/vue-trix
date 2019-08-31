@@ -13,8 +13,8 @@
       @trix-selection-change="emitSelectionChange"
       @trix-initialize="emitInitialize"
       @trix-before-initialize="emitBeforeInitialize"
-      @trix-focus="trixFocus"
-      @trix-blur="trixBlur"
+      @trix-focus="processTrixFocus"
+      @trix-blur="processTrixBlur"
     />
     <input
       type="hidden"
@@ -34,16 +34,18 @@ import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
 import EmitSelectionChange from '../mixins/EmitSelectionChange.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 import EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'
+import ProcessEditorFocusAndBlur from '../mixins/ProcessEditorFocusAndBlur.js'
 
 export default {
   name: 'VueTrix',
   mixins: [
-    EmitFileAccept('VueTrix'),
-    EmitInitialize('VueTrix'),
-    EmitAttachmentAdd('VueTrix'),
-    EmitSelectionChange('VueTrix'),
-    EmitAttachmentRemove('VueTrix'),
-    EmitBeforeInitialize('VueTrix')
+    EmitFileAccept(),
+    EmitInitialize(),
+    EmitAttachmentAdd(),
+    EmitSelectionChange(),
+    EmitAttachmentRemove(),
+    EmitBeforeInitialize(),
+    ProcessEditorFocusAndBlur()
   ],
   model: {
     prop: 'srcContent',
@@ -113,24 +115,6 @@ export default {
       default () {
         return false
       }
-    },
-    /**
-     * The function to call when editor is focused (optional).
-     */
-    trixFocus: {
-      type: Function,
-      required: false,
-      default: () => {
-      }
-    },
-    /**
-     * The function to call when editor goes out of focus (optional).
-     */
-    trixBlur: {
-      type: Function,
-      required: false,
-      default: () => {
-      }
     }
   },
   created () {
@@ -151,7 +135,8 @@ export default {
   },
   data () {
     return {
-      editorContent: this.srcContent
+      editorContent: this.srcContent,
+      isActived: null
     }
   },
   methods: {
@@ -163,10 +148,16 @@ export default {
       newContent = newContent === undefined ? '' : newContent
 
       if (this.$refs.trix.editor.innerHTML !== newContent) {
-        // Update editor's content when initial content changed
+        /* Update editor's content when initial content changed */
         this.editorContent = newContent
-        // FIXME: should keep cursor position after refresh the editor's content.
-        this.reloadEditorContent(this.editorContent)
+
+        /** 
+         *  If user are typing, then don't reload the editor,
+         *  hence keep cursor's position after typing.
+         */
+        if (!this.isActived) {
+          this.reloadEditorContent(this.editorContent)
+        }
       }
     },
     emitEditorState (value) {

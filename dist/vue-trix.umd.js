@@ -1162,12 +1162,12 @@ var es6_function_name = __webpack_require__("7f7f");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"361c3fe1-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=c5f5adb4&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.inputId || _vm.generateId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.trixFocus,"trix-blur":_vm.trixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.inputId || _vm.generateId},domProps:{"value":_vm.editorContent}})],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"361c3fe1-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=f274ce3a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.inputId || _vm.generateId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.processTrixFocus,"trix-blur":_vm.processTrixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.inputId || _vm.generateId},domProps:{"value":_vm.editorContent}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=c5f5adb4&
+// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=f274ce3a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -1265,6 +1265,21 @@ var dist_trix = __webpack_require__("1208");
     }
   };
 });
+// CONCATENATED MODULE: ./src/mixins/ProcessEditorFocusAndBlur.js
+/* harmony default export */ var ProcessEditorFocusAndBlur = (function (component) {
+  return {
+    methods: {
+      processTrixFocus: function processTrixFocus(event) {
+        this.isActived = true;
+        this.$emit('trix-focus', this.$refs.trix.editor, event);
+      },
+      processTrixBlur: function processTrixBlur(event) {
+        this.isActived = false;
+        this.$emit('trix-blur', this.$refs.trix.editor, event);
+      }
+    }
+  };
+});
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=script&lang=js&
 
 
@@ -1303,9 +1318,10 @@ var dist_trix = __webpack_require__("1208");
 
 
 
+
 /* harmony default export */ var VueTrixvue_type_script_lang_js_ = ({
   name: 'VueTrix',
-  mixins: [EmitFileAccept('VueTrix'), EmitInitialize('VueTrix'), EmitAttachmentAdd('VueTrix'), EmitSelectionChange('VueTrix'), EmitAttachmentRemove('VueTrix'), EmitBeforeInitialize('VueTrix')],
+  mixins: [EmitFileAccept(), EmitInitialize(), EmitAttachmentAdd(), EmitSelectionChange(), EmitAttachmentRemove(), EmitBeforeInitialize(), ProcessEditorFocusAndBlur()],
   model: {
     prop: 'srcContent',
     event: 'update'
@@ -1379,24 +1395,6 @@ var dist_trix = __webpack_require__("1208");
       default: function _default() {
         return false;
       }
-    },
-
-    /**
-     * The function to call when editor is focused (optional).
-     */
-    trixFocus: {
-      type: Function,
-      required: false,
-      default: function _default() {}
-    },
-
-    /**
-     * The function to call when editor goes out of focus (optional).
-     */
-    trixBlur: {
-      type: Function,
-      required: false,
-      default: function _default() {}
     }
   },
   created: function created() {
@@ -1418,7 +1416,8 @@ var dist_trix = __webpack_require__("1208");
   },
   data: function data() {
     return {
-      editorContent: this.srcContent
+      editorContent: this.srcContent,
+      isActived: null
     };
   },
   methods: {
@@ -1430,10 +1429,16 @@ var dist_trix = __webpack_require__("1208");
       newContent = newContent === undefined ? '' : newContent;
 
       if (this.$refs.trix.editor.innerHTML !== newContent) {
-        // Update editor's content when initial content changed
-        this.editorContent = newContent; // FIXME: should keep cursor position after refresh the editor's content.
+        /* Update editor's content when initial content changed */
+        this.editorContent = newContent;
+        /** 
+         *  If user are typing, then don't reload the editor,
+         *  hence keep cursor's position after typing.
+         */
 
-        this.reloadEditorContent(this.editorContent);
+        if (!this.isActived) {
+          this.reloadEditorContent(this.editorContent);
+        }
       }
     },
     emitEditorState: function emitEditorState(value) {

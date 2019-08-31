@@ -86,6 +86,21 @@ function EmitBeforeInitialize (component) {
   }
 }
 
+function ProcessEditorFocusAndBlur (component) {
+  return {
+    methods: {
+      processTrixFocus: function processTrixFocus (event) {
+        this.isActived = true;
+        this.$emit('trix-focus', this.$refs.trix.editor, event);
+      },
+      processTrixBlur: function processTrixBlur (event) {
+        this.isActived = false;
+        this.$emit('trix-blur', this.$refs.trix.editor, event);
+      }
+    }
+  }
+}
+
 //
 
 var script = {
@@ -96,7 +111,8 @@ var script = {
     EmitAttachmentAdd(),
     EmitSelectionChange(),
     EmitAttachmentRemove(),
-    EmitBeforeInitialize()
+    EmitBeforeInitialize(),
+    ProcessEditorFocusAndBlur()
   ],
   model: {
     prop: 'srcContent',
@@ -166,24 +182,6 @@ var script = {
       default: function default$6 () {
         return false
       }
-    },
-    /**
-     * The function to call when editor is focused (optional).
-     */
-    trixFocus: {
-      type: Function,
-      required: false,
-      default: function () {
-      }
-    },
-    /**
-     * The function to call when editor goes out of focus (optional).
-     */
-    trixBlur: {
-      type: Function,
-      required: false,
-      default: function () {
-      }
     }
   },
   created: function created () {
@@ -204,7 +202,8 @@ var script = {
   },
   data: function data () {
     return {
-      editorContent: this.srcContent
+      editorContent: this.srcContent,
+      isActived: null
     }
   },
   methods: {
@@ -216,10 +215,16 @@ var script = {
       newContent = newContent === undefined ? '' : newContent;
 
       if (this.$refs.trix.editor.innerHTML !== newContent) {
-        // Update editor's content when initial content changed
+        /* Update editor's content when initial content changed */
         this.editorContent = newContent;
-        // FIXME: should keep cursor position after refresh the editor's content.
-        this.reloadEditorContent(this.editorContent);
+
+        /** 
+         *  If user are typing, then don't reload the editor,
+         *  hence keep cursor's position after typing.
+         */
+        if (!this.isActived) {
+          this.reloadEditorContent(this.editorContent);
+        }
       }
     },
     emitEditorState: function emitEditorState (value) {
@@ -455,8 +460,8 @@ var __vue_render__ = function() {
           "trix-selection-change": _vm.emitSelectionChange,
           "trix-initialize": _vm.emitInitialize,
           "trix-before-initialize": _vm.emitBeforeInitialize,
-          "trix-focus": _vm.trixFocus,
-          "trix-blur": _vm.trixBlur
+          "trix-focus": _vm.processTrixFocus,
+          "trix-blur": _vm.processTrixBlur
         }
       }),
       _vm._v(" "),
@@ -478,7 +483,7 @@ __vue_render__._withStripped = true;
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-79e9c7fc_0", { source: "\n.src-components-trix_container-5Bcy {\n  max-width: 100%;\n  height: auto;\n}\n.src-components-trix_container-5Bcy .src-components-trix-button-group-2D-J {\n  background-color: white;\n}\n.src-components-trix_container-5Bcy .src-components-trix-content-1TD_ {\n  background-color: white;\n}\n", map: {"version":3,"sources":["/Users/hanhdt/Workspace/side-projects/vuejs/vue-trix/src/components/VueTrix.vue"],"names":[],"mappings":";AA8OA;EACA,eAAA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;AACA","file":"VueTrix.vue","sourcesContent":["<template>\n  <div :class=\"[$style.trix_container]\">\n    <trix-editor\n      :contenteditable=\"!disabledEditor\"\n      :class=\"['trix-content']\"\n      ref=\"trix\"\n      :input=\"inputId || generateId\"\n      :placeholder=\"placeholder\"\n      @trix-change=\"handleContentChange\"\n      @trix-file-accept=\"emitFileAccept\"\n      @trix-attachment-add=\"emitAttachmentAdd\"\n      @trix-attachment-remove=\"emitAttachmentRemove\"\n      @trix-selection-change=\"emitSelectionChange\"\n      @trix-initialize=\"emitInitialize\"\n      @trix-before-initialize=\"emitBeforeInitialize\"\n      @trix-focus=\"trixFocus\"\n      @trix-blur=\"trixBlur\"\n    />\n    <input\n      type=\"hidden\"\n      :name=\"inputName\"\n      :id=\"inputId || generateId\"\n      :value=\"editorContent\"\n    >\n  </div>\n</template>\n\n<script>\nimport 'trix'\nimport 'trix/dist/trix.css'\nimport EmitFileAccept from '../mixins/EmitFileAccept.js'\nimport EmitInitialize from '../mixins/EmitInitialize.js'\nimport EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'\nimport EmitSelectionChange from '../mixins/EmitSelectionChange.js'\nimport EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'\nimport EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'\n\nexport default {\n  name: 'VueTrix',\n  mixins: [\n    EmitFileAccept('VueTrix'),\n    EmitInitialize('VueTrix'),\n    EmitAttachmentAdd('VueTrix'),\n    EmitSelectionChange('VueTrix'),\n    EmitAttachmentRemove('VueTrix'),\n    EmitBeforeInitialize('VueTrix')\n  ],\n  model: {\n    prop: 'srcContent',\n    event: 'update'\n  },\n  props: {\n    /** \n     * This prop will put the editor in read-only mode\n     */\n    disabledEditor: {\n      type: Boolean,\n      required: false,\n      default () {\n        return false\n      }\n    },\n    /**\n     * This is referenced `id` of the hidden input field defined.\n     * It is optional and will be a random string by default.\n     */\n    inputId: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * This is referenced `name` of the hidden input field defined,\n     * default value is `content`.\n     */\n    inputName: {\n      type: String,\n      required: false,\n      default () {\n        return 'content'\n      }\n    },\n    /**\n     * The placeholder attribute specifies a short hint\n     * that describes the expected value of a editor.\n     */\n    placeholder: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * The source content is associcated to v-model directive.\n     */\n    srcContent: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * The boolean attribute allows saving editor state into browser's localStorage\n     * (optional, default is `false`).\n     */\n    localStorage: {\n      type: Boolean,\n      required: false,\n      default () {\n        return false\n      }\n    },\n    /**\n     * The function to call when editor is focused (optional).\n     */\n    trixFocus: {\n      type: Function,\n      required: false,\n      default: () => {\n      }\n    },\n    /**\n     * The function to call when editor goes out of focus (optional).\n     */\n    trixBlur: {\n      type: Function,\n      required: false,\n      default: () => {\n      }\n    }\n  },\n  created () {\n    /**\n     *  If localStorage is enabled,\n     *  then load editor's content from the beginning.\n     */\n    if (this.localStorage) {\n      const savedValue = localStorage.getItem(this.storageId('VueTrix'))\n      if (savedValue && !this.srcContent) {\n        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))\n      }\n    }\n  },\n  mounted () {\n    /** Check if editor read-only mode is required */\n    this.decorateDisabledEditor()\n  },\n  data () {\n    return {\n      editorContent: this.srcContent\n    }\n  },\n  methods: {\n    handleContentChange (event) {\n      this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML\n      this.$emit('input', this.editorContent)\n    },\n    handleInitialContentChange (newContent, oldContent) {\n      newContent = newContent === undefined ? '' : newContent\n\n      if (this.$refs.trix.editor.innerHTML !== newContent) {\n        // Update editor's content when initial content changed\n        this.editorContent = newContent\n        // FIXME: should keep cursor position after refresh the editor's content.\n        this.reloadEditorContent(this.editorContent)\n      }\n    },\n    emitEditorState (value) {\n      /**\n       * If localStorage is enabled,\n       * then save editor's content into storage\n       */\n      if (this.localStorage) {\n        localStorage.setItem(\n          this.storageId('VueTrix'),\n          JSON.stringify(this.$refs.trix.editor)\n        )\n      }\n      this.$emit('update', this.editorContent)\n    },\n    storageId (component) {\n      if (this.inputId) {\n        return `${component}.${this.inputId}.content`\n      } else {\n        return `${component}.content`\n      }\n    },\n    reloadEditorContent (newContent) {\n      // Reload HTML content\n      this.$refs.trix.editor.loadHTML(newContent)\n\n      // Move cursor to end of new content updated\n      this.$refs.trix.editor.setSelectedRange(this.getContentEndPosition())\n    },\n    getContentEndPosition () {\n      return this.$refs.trix.editor.getDocument().toString().length - 1\n    },\n    decorateDisabledEditor () {\n      /** Disable toolbar and editor by pointer events styling */\n      if (this.disabledEditor) {\n        document.querySelector('trix-toolbar').style['pointer-events'] = 'none'\n        document.querySelector('trix-editor').style['pointer-events'] = 'none'\n        document.querySelector('trix-editor').style['background'] = '#ecf0f1'\n      }\n    }\n  },\n  computed: {\n    /**\n     * Compute a random id of hidden input\n     * when it haven't been specified.\n     */\n    generateId () {\n      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n        var r = Math.random() * 16 | 0\n        var v = c === 'x' ? r : (r & 0x3 | 0x8)\n        return v.toString(16)\n      })\n    },\n    initialContent () {\n      return this.srcContent\n    }\n  },\n  watch: {\n    editorContent: {\n      handler: 'emitEditorState'\n    },\n    initialContent: {\n      handler: 'handleInitialContentChange'\n    }\n  }\n}\n</script>\n\n<style lang=\"css\" module>\n.trix_container {\n  max-width: 100%;\n  height: auto;\n}\n.trix_container .trix-button-group {\n  background-color: white;\n}\n.trix_container .trix-content {\n  background-color: white;\n}\n</style>\n"]}, media: undefined });
+    inject("data-v-1e1ac2bf_0", { source: "\n.src-components-trix_container-5Bcy {\n  max-width: 100%;\n  height: auto;\n}\n.src-components-trix_container-5Bcy .src-components-trix-button-group-2D-J {\n  background-color: white;\n}\n.src-components-trix_container-5Bcy .src-components-trix-content-1TD_ {\n  background-color: white;\n}\n", map: {"version":3,"sources":["/Users/hanhdt/Workspace/side-projects/vuejs/vue-trix/src/components/VueTrix.vue"],"names":[],"mappings":";AAqOA;EACA,eAAA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;AACA","file":"VueTrix.vue","sourcesContent":["<template>\n  <div :class=\"[$style.trix_container]\">\n    <trix-editor\n      :contenteditable=\"!disabledEditor\"\n      :class=\"['trix-content']\"\n      ref=\"trix\"\n      :input=\"inputId || generateId\"\n      :placeholder=\"placeholder\"\n      @trix-change=\"handleContentChange\"\n      @trix-file-accept=\"emitFileAccept\"\n      @trix-attachment-add=\"emitAttachmentAdd\"\n      @trix-attachment-remove=\"emitAttachmentRemove\"\n      @trix-selection-change=\"emitSelectionChange\"\n      @trix-initialize=\"emitInitialize\"\n      @trix-before-initialize=\"emitBeforeInitialize\"\n      @trix-focus=\"processTrixFocus\"\n      @trix-blur=\"processTrixBlur\"\n    />\n    <input\n      type=\"hidden\"\n      :name=\"inputName\"\n      :id=\"inputId || generateId\"\n      :value=\"editorContent\"\n    >\n  </div>\n</template>\n\n<script>\nimport 'trix'\nimport 'trix/dist/trix.css'\nimport EmitFileAccept from '../mixins/EmitFileAccept.js'\nimport EmitInitialize from '../mixins/EmitInitialize.js'\nimport EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'\nimport EmitSelectionChange from '../mixins/EmitSelectionChange.js'\nimport EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'\nimport EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'\nimport ProcessEditorFocusAndBlur from '../mixins/ProcessEditorFocusAndBlur.js'\n\nexport default {\n  name: 'VueTrix',\n  mixins: [\n    EmitFileAccept(),\n    EmitInitialize(),\n    EmitAttachmentAdd(),\n    EmitSelectionChange(),\n    EmitAttachmentRemove(),\n    EmitBeforeInitialize(),\n    ProcessEditorFocusAndBlur()\n  ],\n  model: {\n    prop: 'srcContent',\n    event: 'update'\n  },\n  props: {\n    /** \n     * This prop will put the editor in read-only mode\n     */\n    disabledEditor: {\n      type: Boolean,\n      required: false,\n      default () {\n        return false\n      }\n    },\n    /**\n     * This is referenced `id` of the hidden input field defined.\n     * It is optional and will be a random string by default.\n     */\n    inputId: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * This is referenced `name` of the hidden input field defined,\n     * default value is `content`.\n     */\n    inputName: {\n      type: String,\n      required: false,\n      default () {\n        return 'content'\n      }\n    },\n    /**\n     * The placeholder attribute specifies a short hint\n     * that describes the expected value of a editor.\n     */\n    placeholder: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * The source content is associcated to v-model directive.\n     */\n    srcContent: {\n      type: String,\n      required: false,\n      default () {\n        return ''\n      }\n    },\n    /**\n     * The boolean attribute allows saving editor state into browser's localStorage\n     * (optional, default is `false`).\n     */\n    localStorage: {\n      type: Boolean,\n      required: false,\n      default () {\n        return false\n      }\n    }\n  },\n  created () {\n    /**\n     *  If localStorage is enabled,\n     *  then load editor's content from the beginning.\n     */\n    if (this.localStorage) {\n      const savedValue = localStorage.getItem(this.storageId('VueTrix'))\n      if (savedValue && !this.srcContent) {\n        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))\n      }\n    }\n  },\n  mounted () {\n    /** Check if editor read-only mode is required */\n    this.decorateDisabledEditor()\n  },\n  data () {\n    return {\n      editorContent: this.srcContent,\n      isActived: null\n    }\n  },\n  methods: {\n    handleContentChange (event) {\n      this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML\n      this.$emit('input', this.editorContent)\n    },\n    handleInitialContentChange (newContent, oldContent) {\n      newContent = newContent === undefined ? '' : newContent\n\n      if (this.$refs.trix.editor.innerHTML !== newContent) {\n        /* Update editor's content when initial content changed */\n        this.editorContent = newContent\n\n        /** \n         *  If user are typing, then don't reload the editor,\n         *  hence keep cursor's position after typing.\n         */\n        if (!this.isActived) {\n          this.reloadEditorContent(this.editorContent)\n        }\n      }\n    },\n    emitEditorState (value) {\n      /**\n       * If localStorage is enabled,\n       * then save editor's content into storage\n       */\n      if (this.localStorage) {\n        localStorage.setItem(\n          this.storageId('VueTrix'),\n          JSON.stringify(this.$refs.trix.editor)\n        )\n      }\n      this.$emit('update', this.editorContent)\n    },\n    storageId (component) {\n      if (this.inputId) {\n        return `${component}.${this.inputId}.content`\n      } else {\n        return `${component}.content`\n      }\n    },\n    reloadEditorContent (newContent) {\n      // Reload HTML content\n      this.$refs.trix.editor.loadHTML(newContent)\n\n      // Move cursor to end of new content updated\n      this.$refs.trix.editor.setSelectedRange(this.getContentEndPosition())\n    },\n    getContentEndPosition () {\n      return this.$refs.trix.editor.getDocument().toString().length - 1\n    },\n    decorateDisabledEditor () {\n      /** Disable toolbar and editor by pointer events styling */\n      if (this.disabledEditor) {\n        document.querySelector('trix-toolbar').style['pointer-events'] = 'none'\n        document.querySelector('trix-editor').style['pointer-events'] = 'none'\n        document.querySelector('trix-editor').style['background'] = '#ecf0f1'\n      }\n    }\n  },\n  computed: {\n    /**\n     * Compute a random id of hidden input\n     * when it haven't been specified.\n     */\n    generateId () {\n      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n        var r = Math.random() * 16 | 0\n        var v = c === 'x' ? r : (r & 0x3 | 0x8)\n        return v.toString(16)\n      })\n    },\n    initialContent () {\n      return this.srcContent\n    }\n  },\n  watch: {\n    editorContent: {\n      handler: 'emitEditorState'\n    },\n    initialContent: {\n      handler: 'handleInitialContentChange'\n    }\n  }\n}\n</script>\n\n<style lang=\"css\" module>\n.trix_container {\n  max-width: 100%;\n  height: auto;\n}\n.trix_container .trix-button-group {\n  background-color: white;\n}\n.trix_container .trix-content {\n  background-color: white;\n}\n</style>\n"]}, media: undefined });
 Object.defineProperty(this, "$style", { value: {"trix_container":"src-components-trix_container-5Bcy","trix-button-group":"src-components-trix-button-group-2D-J","trix-content":"src-components-trix-content-1TD_"} });
 
   };
