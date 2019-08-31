@@ -3,7 +3,6 @@
     <div class="editor-wrapper">
       <h2>1. A simple text editor</h2>
       <VueTrix
-        disabledEditor
         localStorage
         v-model="content1"
         placeholder="Enter your content"

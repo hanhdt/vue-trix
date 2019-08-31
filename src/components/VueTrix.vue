@@ -165,6 +165,8 @@ export default {
       if (this.$refs.trix.editor.innerHTML !== newContent) {
         // Update editor's content when initial content changed
         this.editorContent = newContent
+        // FIXME: should keep cursor position after refresh the editor's content.
+        this.reloadEditorContent(this.editorContent)
       }
     },
     emitEditorState (value) {
