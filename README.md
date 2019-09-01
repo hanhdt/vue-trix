@@ -12,9 +12,9 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 
 ## Features
 
-- A simple and lightweight rich-text editor
-- Binding with `v-model` easily
-- Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving)
+- A simple and lightweight rich-text editor for writing daily.
+- Two-ways binding with `v-model` easily.
+- Auto-save editor data temporally what you has typed into the form input in case something goes wrong (for example, the browser could crash or you could accidentally refresh the page without submit saving).
 
 ## Installation
 
@@ -28,6 +28,12 @@ YARN
 
 ```Shell
   $yarn add vue-trix
+```
+
+Or directly from latest Github repo
+
+```Shell
+  $npm install --save hanhdt/vue-trix
 ```
 
 ## Mount
@@ -82,8 +88,6 @@ Add `VueTrix` component into `*.vue` template
 - `placeholder`: The placeholder option attribute specifies a short hint that describes the expected value of a editor.
 - `disabledEditor`: This prop will put the editor in read-only mode.
 - `localStorage`: The boolean attribute allows saving editor state into browser's localStorage (optional, default is `false`).
-- `trixFocus`: The function to call when editor is focused (optional).
-- `trixBlur`: The function to call when editor goes out of focus (optional).
 
 ### Populating editor content
 
