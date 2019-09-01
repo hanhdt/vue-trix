@@ -30,6 +30,12 @@ YARN
   $yarn add vue-trix
 ```
 
+Or directly from latest Github repo
+
+```Shell
+  $npm install --save hanhdt/vue-trix
+```
+
 ## Mount
 
 ### Mount with global
