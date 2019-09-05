@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     handleContentChange (event) {
-      this.editorContent = event.srcElement ? event.srcElement.innerHTML : event.target.innerHTML
+      this.editorContent = event.srcElement ? event.srcElement.value : event.target.value
       this.$emit('input', this.editorContent)
     },
     handleInitialContentChange (newContent, oldContent) {
