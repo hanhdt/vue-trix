@@ -91,9 +91,7 @@ describe('VueTrix.vue', () => {
     expect(inputEl.value).toEqual('init content')
 
     // Sets the input to the correct value when props change
-    wrapper.setData({
-      editorContent: 'new content'
-    })
+    wrapper.vm.editorContent = 'new content'
     expect(inputEl.value).toEqual('new content')
   })
 })

@@ -13,11 +13,13 @@ module.exports = {
     '/node_modules/.*'
   ],
   moduleNameMapper: {
+    '^vue$': 'vue/dist/vue.common.js',
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss)$': 'identity-obj-proxy'
   },
   snapshotSerializers: [
-    'jest-serializer-vue'
+    'jest-serializer-vue',
+    '<rootDir>/jest/htmlSnapshotBeautifier.js'
   ],
   testMatch: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
