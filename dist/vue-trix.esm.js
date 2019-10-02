@@ -90,12 +90,16 @@ function ProcessEditorFocusAndBlur (component) {
   return {
     methods: {
       processTrixFocus: function processTrixFocus (event) {
-        this.isActived = true;
-        this.$emit('trix-focus', this.$refs.trix.editor, event);
+        if (this.$refs.trix) {
+          this.isActived = true;
+          this.$emit('trix-focus', this.$refs.trix.editor, event);
+        }
       },
       processTrixBlur: function processTrixBlur (event) {
-        this.isActived = false;
-        this.$emit('trix-blur', this.$refs.trix.editor, event);
+        if (this.$refs.trix) {
+          this.isActived = false;
+          this.$emit('trix-blur', this.$refs.trix.editor, event);
+        }
       }
     }
   }

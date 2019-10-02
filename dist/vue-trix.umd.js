@@ -1162,7 +1162,7 @@ var es6_function_name = __webpack_require__("7f7f");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"04f5494a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=66ad78e3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c470db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=66ad78e3&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.inputId || _vm.generateId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.processTrixFocus,"trix-blur":_vm.processTrixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.inputId || _vm.generateId},domProps:{"value":_vm.editorContent}})],1)}
 var staticRenderFns = []
 
@@ -1270,12 +1270,16 @@ var dist_trix = __webpack_require__("1208");
   return {
     methods: {
       processTrixFocus: function processTrixFocus(event) {
-        this.isActived = true;
-        this.$emit('trix-focus', this.$refs.trix.editor, event);
+        if (this.$refs.trix) {
+          this.isActived = true;
+          this.$emit('trix-focus', this.$refs.trix.editor, event);
+        }
       },
       processTrixBlur: function processTrixBlur(event) {
-        this.isActived = false;
-        this.$emit('trix-blur', this.$refs.trix.editor, event);
+        if (this.$refs.trix) {
+          this.isActived = false;
+          this.$emit('trix-blur', this.$refs.trix.editor, event);
+        }
       }
     }
   };
