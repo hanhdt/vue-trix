@@ -2,7 +2,33 @@
 
 Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor Vue.js component for writing daily
 
-## [Sample page](/example)
+**Table of Contents**
+
+  - [Getting started](#getting-started)
+    - [Demo page](#sample-page)
+    - [Integrate into the form](#integrate-into-the-form)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [NPM](#npm)
+    - [YARN](#yarn)
+    - [Or directly from latest Github repo](#or-directly-from-latest-github-repo)
+  - [Mount](#mount)
+    - [Mount with global](#mount-with-global)
+    - [Mount with component](#mount-with-component)
+  - [Component Usages](#component-usages)
+    - [Create a simple editor in your single component file](#create-a-simple-editor-in-your-single-component-file)
+    - [Integrating with Forms](#integrating-with-forms)
+    - [Props descriptions](#props-descriptions)
+    - [Populating editor content](#populating-editor-content)
+      - [Init loading content into the editor](#init-loading-content-into-the-editor)
+      - [Track data changes](#track-data-changes)
+    - [Binding attachment changes](#binding-attachment-changes)
+  - [Trix document](#trix-document)
+  - [Contributing](#contributing)
+
+## Getting started
+
+### [Demo page](/example)
 
 ![vue-trix editor](/example/src/assets/vue-trix-editor.png)
 
@@ -18,19 +44,19 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 
 ## Installation
 
-NPM
+### NPM
 
 ```Shell
   $npm install --save vue-trix
 ```
 
-YARN
+### YARN
 
 ```Shell
   $yarn add vue-trix
 ```
 
-Or directly from latest Github repo
+### Or directly from latest Github repo
 
 ```Shell
   $npm install --save hanhdt/vue-trix
