@@ -1,6 +1,6 @@
 {
   "name": "vue-trix",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Lightweight and simple Trix rich-text editor component for Vue.js",
   "main": "dist/vue-trix.umd.js",
   "module": "dist/vue-trix.esm.js",
@@ -50,7 +50,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-plugin-unit-jest": "^3.8.0",
+    "@vue/cli-plugin-unit-jest": "^4.0.4",
     "@vue/cli-service": "^3.8.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
