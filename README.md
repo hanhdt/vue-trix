@@ -23,6 +23,7 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
       - [Init loading content into the editor](#init-loading-content-into-the-editor)
       - [Track data changes](#track-data-changes)
     - [Binding attachment changes](#binding-attachment-changes)
+    - [Process uploading attachment to remote server](#process-uploading-attachment-to-remote-server)
   - [Trix document](#trix-document)
   - [Contributing](#contributing)
 
@@ -192,13 +193,13 @@ Add binding event listener to `trix-attachment-add`
     const remoteHost = 'your remote host';
 
     function handleAttachmentChanges(event) {
-      // get file object
+      // 1. get file object
       let file = event.attachment.file;
 
-      // upload file to remote server with FormData
+      // 2. upload file to remote server with FormData
       // ...
 
-      // if upload success, set back the attachment's URL attribute
+      // 3. if upload success, set back the attachment's URL attribute
       // @param object data from remote server response data after upload.
       let attributes = {
         url: remoteHost + data.path,
