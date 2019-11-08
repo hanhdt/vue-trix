@@ -164,7 +164,7 @@ export default {
 };
 ```
 
-### Binding attachment changes
+### Binding attachment events
 
 The `<VueTrix/>` element emits several events which you can use to observe and respond to changes in editor state.
 
@@ -173,6 +173,40 @@ The `<VueTrix/>` element emits several events which you can use to observe and r
 - `@trix-attachment-add` fires after an attachment is added to the document. You can access the Trix attachment object through the attachment property on the event. If the attachment object has a file property, you should store this file remotely and set the attachment’s URL attribute.
 
 - `@trix-attachment-remove` fires when an attachment is removed from the document. You can access the Trix attachment object through the attachment property on the event. You may wish to use this event to clean up remotely stored files.
+
+### Process uploading attachment to remote server
+
+Add binding event listener to `trix-attachment-add`
+
+  ```HTML
+    <template>
+      <!-- ... -->
+      <VueTrix @trix-attachment-add="handleAttachmentChanges"/>
+      <!-- ... -->
+    </template>
+  ```
+
+  In Javascript
+
+  ```Javascript
+    const remoteHost = 'your remote host';
+
+    function handleAttachmentChanges(event) {
+      // get file object
+      let file = event.attachment.file;
+
+      // upload file to remote server with FormData
+      // ...
+
+      // if upload success, set back the attachment's URL attribute
+      // @param object data from remote server response data after upload.
+      let attributes = {
+        url: remoteHost + data.path,
+        href: remoteHost + data.path
+      };
+      event.attachment.setAttributes(attributes);
+    }
+  ```
 
 ## Trix document
 
