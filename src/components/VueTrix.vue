@@ -195,7 +195,7 @@ export default {
       if (this.disabledEditor) {
         document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
         document.querySelector('trix-editor').style['pointer-events'] = 'none'
-        document.querySelector('trix-editor').style['background'] = '#ecf0f1'
+        document.querySelector('trix-editor').style['background'] = '#e9ecef'
       }
     }
   },
