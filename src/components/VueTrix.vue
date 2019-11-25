@@ -4,7 +4,7 @@
       :contenteditable="!disabledEditor"
       :class="['trix-content']"
       ref="trix"
-      :input="inputId || generateId"
+      :input="computedId"
       :placeholder="placeholder"
       @trix-change="handleContentChange"
       @trix-file-accept="emitFileAccept"
@@ -19,9 +19,9 @@
     <input
       type="hidden"
       :name="inputName"
-      :id="inputId || generateId"
+      :id="computedId"
       :value="editorContent"
-    >
+    />
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
     event: 'update'
   },
   props: {
-    /** 
+    /**
      * This prop will put the editor in read-only mode
      */
     disabledEditor: {
@@ -151,7 +151,7 @@ export default {
         /* Update editor's content when initial content changed */
         this.editorContent = newContent
 
-        /** 
+        /**
          *  If user are typing, then don't reload the editor,
          *  hence keep cursor's position after typing.
          */
@@ -193,9 +193,9 @@ export default {
     decorateDisabledEditor () {
       /** Disable toolbar and editor by pointer events styling */
       if (this.disabledEditor) {
-        document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
-        document.querySelector('trix-editor').style['pointer-events'] = 'none'
-        document.querySelector('trix-editor').style['background'] = '#e9ecef'
+        this.$refs.trix.toolbarElement.style['pointer-events'] = 'none'
+        this.$refs.trix.style['pointer-events'] = 'none'
+        this.$refs.trix.style['background'] = '#e9ecef'
       }
     }
   },
@@ -210,6 +210,9 @@ export default {
         var v = c === 'x' ? r : (r & 0x3 | 0x8)
         return v.toString(16)
       })
+    },
+    computedId () {
+      return this.inputId || this.generateId
     },
     initialContent () {
       return this.srcContent
