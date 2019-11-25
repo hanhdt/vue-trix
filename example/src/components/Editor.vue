@@ -22,11 +22,26 @@
         <button>Send</button>
       </form>
     </div>
+    <hr>
+    <div class="editor-wrapper">
+      <h2>3. Text editor disabled</h2>
+      <VueTrix
+        localStorage
+        v-model="content3"
+        placeholder="Enter your content"
+        disabled-editor
+        @trix-file-accept="handleFile"
+        @trix-attachment-add="handleAttachmentAdd"
+        @trix-attachment-remove="handleAttachmentRemove"
+        @trix-focus="handleEditorFocus"
+        @trix-blur="handleEditorBlur"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import VueTrix from '../../../dist/vue-trix.esm.js'
+import VueTrix from '../../../src/components/VueTrix.vue'
 
 export default {
   name: 'Editor',
