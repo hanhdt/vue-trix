@@ -193,9 +193,9 @@ export default {
     decorateDisabledEditor () {
       /** Disable toolbar and editor by pointer events styling */
       if (this.disabledEditor) {
-        document.querySelector('trix-toolbar').style['pointer-events'] = 'none'
-        document.querySelector('trix-editor').style['pointer-events'] = 'none'
-        document.querySelector('trix-editor').style['background'] = '#e9ecef'
+        this.$refs.trix.toolbarElement.style['pointer-events'] = 'none'
+        this.$refs.trix.style['pointer-events'] = 'none'
+        this.$refs.trix.style['background'] = '#e9ecef'
       }
     }
   },
