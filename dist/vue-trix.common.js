@@ -159,7 +159,7 @@ module.exports = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"trix_container":"VueTrix_trix_container_5Bcya","trix-button-group":"VueTrix_trix-button-group_2D-Jd","trix-content":"VueTrix_trix-content_1TD_D"};
+module.exports = {"trix_container":"VueTrix_trix_container_2DRb3","trix-button-group":"VueTrix_trix-button-group_2Me96","trix-content":"VueTrix_trix-content_3q6fn"};
 
 /***/ }),
 
@@ -1153,12 +1153,12 @@ var es6_function_name = __webpack_require__("7f7f");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"250adecd-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=66ad78e3&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.inputId || _vm.generateId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.processTrixFocus,"trix-blur":_vm.processTrixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.inputId || _vm.generateId},domProps:{"value":_vm.editorContent}})],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4d2b040a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=2805fb13&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.computedId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.processTrixFocus,"trix-blur":_vm.processTrixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.computedId},domProps:{"value":_vm.editorContent}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=66ad78e3&
+// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=2805fb13&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -1322,7 +1322,7 @@ var dist_trix = __webpack_require__("1208");
     event: 'update'
   },
   props: {
-    /** 
+    /**
      * This prop will put the editor in read-only mode
      */
     disabledEditor: {
@@ -1426,7 +1426,7 @@ var dist_trix = __webpack_require__("1208");
       if (this.$refs.trix.editor.innerHTML !== newContent) {
         /* Update editor's content when initial content changed */
         this.editorContent = newContent;
-        /** 
+        /**
          *  If user are typing, then don't reload the editor,
          *  hence keep cursor's position after typing.
          */
@@ -1466,9 +1466,9 @@ var dist_trix = __webpack_require__("1208");
     decorateDisabledEditor: function decorateDisabledEditor() {
       /** Disable toolbar and editor by pointer events styling */
       if (this.disabledEditor) {
-        document.querySelector('trix-toolbar').style['pointer-events'] = 'none';
-        document.querySelector('trix-editor').style['pointer-events'] = 'none';
-        document.querySelector('trix-editor').style['background'] = '#ecf0f1';
+        this.$refs.trix.toolbarElement.style['pointer-events'] = 'none';
+        this.$refs.trix.style['pointer-events'] = 'none';
+        this.$refs.trix.style['background'] = '#e9ecef';
       }
     }
   },
@@ -1483,6 +1483,9 @@ var dist_trix = __webpack_require__("1208");
         var v = c === 'x' ? r : r & 0x3 | 0x8;
         return v.toString(16);
       });
+    },
+    computedId: function computedId() {
+      return this.inputId || this.generateId;
     },
     initialContent: function initialContent() {
       return this.srcContent;
