@@ -4,7 +4,7 @@
       :contenteditable="!disabledEditor"
       :class="['trix-content']"
       ref="trix"
-      :input="inputId || generateId"
+      :input="computedId"
       :placeholder="placeholder"
       @trix-change="handleContentChange"
       @trix-file-accept="emitFileAccept"
@@ -19,7 +19,7 @@
     <input
       type="hidden"
       :name="inputName"
-      :id="inputId || generateId"
+      :id="computedId"
       :value="editorContent"
     />
   </div>
