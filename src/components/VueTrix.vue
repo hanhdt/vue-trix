@@ -21,7 +21,7 @@
       :name="inputName"
       :id="inputId || generateId"
       :value="editorContent"
-    >
+    />
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
     event: 'update'
   },
   props: {
-    /** 
+    /**
      * This prop will put the editor in read-only mode
      */
     disabledEditor: {
@@ -151,7 +151,7 @@ export default {
         /* Update editor's content when initial content changed */
         this.editorContent = newContent
 
-        /** 
+        /**
          *  If user are typing, then don't reload the editor,
          *  hence keep cursor's position after typing.
          */
@@ -210,6 +210,9 @@ export default {
         var v = c === 'x' ? r : (r & 0x3 | 0x8)
         return v.toString(16)
       })
+    },
+    computedId () {
+      return this.inputId || this.generateId
     },
     initialContent () {
       return this.srcContent
