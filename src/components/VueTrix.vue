@@ -37,7 +37,7 @@ import EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'
 import ProcessEditorFocusAndBlur from '../mixins/ProcessEditorFocusAndBlur.js'
 
 export default {
-  name: 'VueTrix',
+  name: 'vue-trix',
   mixins: [
     EmitFileAccept(),
     EmitInitialize(),
