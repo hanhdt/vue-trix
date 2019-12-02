@@ -1153,12 +1153,12 @@ var es6_function_name = __webpack_require__("7f7f");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"06817dd9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=0a43e5f7&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"64a441ce-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueTrix.vue?vue&type=template&id=60ad9983&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.$style.trix_container]},[_c('trix-editor',{ref:"trix",class:['trix-content'],attrs:{"contenteditable":!_vm.disabledEditor,"input":_vm.computedId,"placeholder":_vm.placeholder},on:{"trix-change":_vm.handleContentChange,"trix-file-accept":_vm.emitFileAccept,"trix-attachment-add":_vm.emitAttachmentAdd,"trix-attachment-remove":_vm.emitAttachmentRemove,"trix-selection-change":_vm.emitSelectionChange,"trix-initialize":_vm.emitInitialize,"trix-before-initialize":_vm.emitBeforeInitialize,"trix-focus":_vm.processTrixFocus,"trix-blur":_vm.processTrixBlur}}),_c('input',{attrs:{"type":"hidden","name":_vm.inputName,"id":_vm.computedId},domProps:{"value":_vm.editorContent}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=0a43e5f7&
+// CONCATENATED MODULE: ./src/components/VueTrix.vue?vue&type=template&id=60ad9983&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -1423,7 +1423,7 @@ var dist_trix = __webpack_require__("1208");
     handleInitialContentChange: function handleInitialContentChange(newContent, oldContent) {
       newContent = newContent === undefined ? '' : newContent;
 
-      if (this.$refs.trix.editor.innerHTML !== newContent) {
+      if (this.$refs.trix.editor && this.$refs.trix.editor.innerHTML !== newContent) {
         /* Update editor's content when initial content changed */
         this.editorContent = newContent;
         /**

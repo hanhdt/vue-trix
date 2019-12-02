@@ -147,7 +147,7 @@ export default {
     handleInitialContentChange (newContent, oldContent) {
       newContent = newContent === undefined ? '' : newContent
 
-      if (this.$refs.trix.editor.innerHTML !== newContent) {
+      if (this.$refs.trix.editor && this.$refs.trix.editor.innerHTML !== newContent) {
         /* Update editor's content when initial content changed */
         this.editorContent = newContent
 

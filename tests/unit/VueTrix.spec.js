@@ -83,15 +83,14 @@ describe('VueTrix.vue', () => {
       }
     })
 
-    const inputWrapper = wrapper.find('input')
-    const inputEl = inputWrapper.element
+    const inputWrapper = wrapper.find('input[type="hidden"]')
 
     // Has the connect starting value
     expect(wrapper.props().srcContent).toEqual('init content')
-    expect(inputEl.value).toEqual('init content')
+    expect(inputWrapper.element.value).toEqual('init content')
 
     // Sets the input to the correct value when props change
-    wrapper.vm.editorContent = 'new content'
-    expect(inputEl.value).toEqual('new content')
+    wrapper.setProps({ srcContent: 'new content' })
+    expect(wrapper.vm.initialContent).toEqual('new content')
   })
 })
