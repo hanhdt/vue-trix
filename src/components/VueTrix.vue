@@ -131,7 +131,7 @@ export default {
   },
   mounted () {
     /** Check if editor read-only mode is required */
-    this.decorateDisabledEditor()
+    this.decorateDisabledEditor(this.disabledEditor)
   },
   data () {
     return {
@@ -190,12 +190,16 @@ export default {
     getContentEndPosition () {
       return this.$refs.trix.editor.getDocument().toString().length - 1
     },
-    decorateDisabledEditor () {
+    decorateDisabledEditor (editorState) {
       /** Disable toolbar and editor by pointer events styling */
-      if (this.disabledEditor) {
+      if (editorState) {
         this.$refs.trix.toolbarElement.style['pointer-events'] = 'none'
         this.$refs.trix.style['pointer-events'] = 'none'
         this.$refs.trix.style['background'] = '#e9ecef'
+      } else {
+        this.$refs.trix.toolbarElement.style['pointer-events'] = 'unset'
+        this.$refs.trix.style['pointer-events'] = 'unset'
+        this.$refs.trix.style['background'] = 'transparent'
       }
     }
   },
@@ -216,6 +220,9 @@ export default {
     },
     initialContent () {
       return this.srcContent
+    },
+    isDisabled () {
+      return this.disabledEditor
     }
   },
   watch: {
@@ -224,6 +231,9 @@ export default {
     },
     initialContent: {
       handler: 'handleInitialContentChange'
+    },
+    isDisabled: {
+      handler: 'decorateDisabledEditor'
     }
   }
 }

@@ -29,7 +29,7 @@
         localStorage
         v-model="content3"
         placeholder="Enter your content"
-        disabled-editor
+        :disabled-editor="disableEditor"
         @trix-file-accept="handleFile"
         @trix-attachment-add="handleAttachmentAdd"
         @trix-attachment-remove="handleAttachmentRemove"
@@ -59,7 +59,8 @@ export default {
     return {
       content1: '<h1>here is heading</h1>',
       content2: '<blockquote>description content</blockquote>',
-      content3: '<h1>Hello world!</h1>'
+      content3: '<h1>Hello world!</h1>',
+      disableEditor: true
     }
   },
   methods: {
