@@ -117,21 +117,22 @@ export default {
       }
     }
   },
-  created () {
-    /**
-     *  If localStorage is enabled,
-     *  then load editor's content from the beginning.
-     */
-    if (this.localStorage) {
-      const savedValue = localStorage.getItem(this.storageId('VueTrix'))
-      if (savedValue && !this.srcContent) {
-        this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
-      }
-    }
-  },
+  created () {},
   mounted () {
     /** Check if editor read-only mode is required */
-    this.decorateDisabledEditor(this.disabledEditor)
+    this.decorateDisabledEditor(this.disabledEditor);
+    this.$nextTick(() => {
+      /**
+       *  If localStorage is enabled,
+       *  then load editor's content from the beginning.
+       */
+      if (this.localStorage) {
+        const savedValue = localStorage.getItem(this.storageId('VueTrix'))
+        if (savedValue && !this.srcContent) {
+          this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
+        }
+      }
+    })
   },
   data () {
     return {
