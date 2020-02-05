@@ -117,7 +117,6 @@ export default {
       }
     }
   },
-  created () {},
   mounted () {
     /** Check if editor read-only mode is required */
     this.decorateDisabledEditor(this.disabledEditor)
