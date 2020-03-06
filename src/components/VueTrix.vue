@@ -194,7 +194,7 @@ export default {
       /** Disable toolbar and editor by pointer events styling */
       if (editorState) {
         this.$refs.trix.toolbarElement.style['pointer-events'] = 'none'
-        this.$refs.trix.style['pointer-events'] = 'none'
+        this.$refs.trix.contentEditable = false
         this.$refs.trix.style['background'] = '#e9ecef'
       } else {
         this.$refs.trix.toolbarElement.style['pointer-events'] = 'unset'
