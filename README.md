@@ -1,11 +1,15 @@
-# Vue-Trix Text Editor [![npm](https://img.shields.io/npm/v/vue-trix.svg?style=flat)](https://www.npmjs.com/package/vue-trix) [![Build status](https://ci.appveyor.com/api/projects/status/nffmo893v52evpgm/branch/master?svg=true)](https://ci.appveyor.com/project/tranduchanh/vue-trix/branch/master) <img alt="npm" src="https://img.shields.io/npm/dm/vue-trix.svg">
+# Vue-Trix Text Editor
+
+[![npm](https://img.shields.io/npm/v/vue-trix.svg?style=flat)](https://www.npmjs.com/package/vue-trix) [![Build status](https://ci.appveyor.com/api/projects/status/nffmo893v52evpgm/branch/master?svg=true)](https://ci.appveyor.com/project/tranduchanh/vue-trix/branch/master) <img alt="npm" src="https://img.shields.io/npm/dm/vue-trix.svg">
 
 Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text editor Vue.js component for writing daily
 
-**Table of Contents**
+## Table of Contents
 
+- [Vue-Trix Text Editor](#vue-trix-text-editor)
+  - [Table of Contents](#table-of-contents)
   - [Getting started](#getting-started)
-    - [Demo page](#sample-page)
+    - [Demo page](#demo-page)
     - [Integrate into the form](#integrate-into-the-form)
   - [Features](#features)
   - [Installation](#installation)
@@ -15,6 +19,7 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
   - [Mount](#mount)
     - [Mount with global](#mount-with-global)
     - [Mount with component](#mount-with-component)
+    - [Setup with Nuxt.js (SSR)](#setup-with-nuxtjs-ssr)
   - [Component Usages](#component-usages)
     - [Create a simple editor in your single component file](#create-a-simple-editor-in-your-single-component-file)
     - [Integrating with Forms](#integrating-with-forms)
@@ -22,7 +27,7 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
     - [Populating editor content](#populating-editor-content)
       - [Init loading content into the editor](#init-loading-content-into-the-editor)
       - [Track data changes](#track-data-changes)
-    - [Binding attachment changes](#binding-attachment-changes)
+    - [Binding attachment events](#binding-attachment-events)
     - [Process uploading attachment to remote server](#process-uploading-attachment-to-remote-server)
   - [Trix document](#trix-document)
   - [Contributing](#contributing)
@@ -84,6 +89,25 @@ export default {
     VueTrix
   }
 };
+```
+
+### Setup with Nuxt.js (SSR)
+
+Create mounting plugin file
+
+```javascript
+// plugins/vue_trix.js
+import Vue from "vue";
+import VueTrix from "vue-trix";
+
+Vue.use(VueTrix);
+```
+
+Update Nuxt.js config file
+
+```javascript
+// nuxt.config.js
+plugins: [{ src: "~/plugins/vue_trix", mode: "client" }];
 ```
 
 ## Component Usages
@@ -179,35 +203,35 @@ The `<VueTrix/>` element emits several events which you can use to observe and r
 
 Add binding event listener to `trix-attachment-add`
 
-  ```HTML
-    <template>
-      <!-- ... -->
-      <VueTrix @trix-attachment-add="handleAttachmentChanges"/>
-      <!-- ... -->
-    </template>
-  ```
+```HTML
+  <template>
+    <!-- ... -->
+    <VueTrix @trix-attachment-add="handleAttachmentChanges"/>
+    <!-- ... -->
+  </template>
+```
 
-  In Javascript
+In Javascript
 
-  ```Javascript
-    const remoteHost = 'your remote host';
+```Javascript
+  const remoteHost = 'your remote host';
 
-    function handleAttachmentChanges(event) {
-      // 1. get file object
-      let file = event.attachment.file;
+  function handleAttachmentChanges(event) {
+    // 1. get file object
+    let file = event.attachment.file;
 
-      // 2. upload file to remote server with FormData
-      // ...
+    // 2. upload file to remote server with FormData
+    // ...
 
-      // 3. if upload success, set back the attachment's URL attribute
-      // @param object data from remote server response data after upload.
-      let attributes = {
-        url: remoteHost + data.path,
-        href: remoteHost + data.path
-      };
-      event.attachment.setAttributes(attributes);
-    }
-  ```
+    // 3. if upload success, set back the attachment's URL attribute
+    // @param object data from remote server response data after upload.
+    let attributes = {
+      url: remoteHost + data.path,
+      href: remoteHost + data.path
+    };
+    event.attachment.setAttributes(attributes);
+  }
+```
 
 ## Trix document
 
