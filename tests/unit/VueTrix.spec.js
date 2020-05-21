@@ -64,8 +64,7 @@ describe('VueTrix.vue', () => {
         inputId: 'inputId',
         inputName: 'content',
         initContent: 'initContent',
-        placeholder: 'placeholder',
-        autofocus: true
+        placeholder: 'placeholder'
       }
     })
 
@@ -76,7 +75,6 @@ describe('VueTrix.vue', () => {
     expect(trixWrapper.attributes().class).toBe('trix-content')
     expect(trixWrapper.attributes().role).toBe('textbox')
     expect(trixWrapper.attributes().placeholder).toBe('placeholder')
-    expect(trixWrapper.attributes().autofocus).toBe('true')
   })
 
   it('works with v-model directive', () => {

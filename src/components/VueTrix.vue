@@ -11,7 +11,7 @@
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
       @trix-selection-change="emitSelectionChange"
-      @trix-initialize="emitInitialize"
+      @trix-initialize="handleInitialize"
       @trix-before-initialize="emitBeforeInitialize"
       @trix-focus="processTrixFocus"
       @trix-blur="processTrixBlur"
@@ -142,14 +142,6 @@ export default {
           this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
         }
       }
-
-      /**
-       * If autofocus is true, manually set focus to
-       * beginning of content (consistent with Trix behavior)
-       */
-      if (this.autofocus) {
-        this.$refs.trix.editor.setSelectedRange(0)
-      }
     })
   },
   data () {
@@ -162,6 +154,17 @@ export default {
     handleContentChange (event) {
       this.editorContent = event.srcElement ? event.srcElement.value : event.target.value
       this.$emit('input', this.editorContent)
+    },
+    handleInitialize (event) {
+      /**
+       * If autofocus is true, manually set focus to
+       * beginning of content (consistent with Trix behavior)
+       */
+      if (this.autofocus) {
+        this.$refs.trix.editor.setSelectedRange(0)
+      }
+
+      this.$emit('trix-initialize', this.emitInitialize)
     },
     handleInitialContentChange (newContent, oldContent) {
       newContent = newContent === undefined ? '' : newContent
