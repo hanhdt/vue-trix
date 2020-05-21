@@ -26,7 +26,8 @@ describe('VueTrix.vue', () => {
       inputName: 'content',
       placeholder: 'placeholder',
       srcContent: 'srcContent',
-      localStorage: true
+      localStorage: true,
+      autofocus: true
     }
 
     const wrapper = shallowMount(VueTrix, { propsData })
@@ -63,7 +64,8 @@ describe('VueTrix.vue', () => {
         inputId: 'inputId',
         inputName: 'content',
         initContent: 'initContent',
-        placeholder: 'placeholder'
+        placeholder: 'placeholder',
+        autofocus: true
       }
     })
 
@@ -74,6 +76,7 @@ describe('VueTrix.vue', () => {
     expect(trixWrapper.attributes().class).toBe('trix-content')
     expect(trixWrapper.attributes().role).toBe('textbox')
     expect(trixWrapper.attributes().placeholder).toBe('placeholder')
+    expect(trixWrapper.attributes().autofocus).toBe('true')
   })
 
   it('works with v-model directive', () => {

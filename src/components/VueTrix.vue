@@ -115,6 +115,17 @@ export default {
       default () {
         return false
       }
+    },
+    /**
+     * Focuses cursor in the editor when attached to the DOM
+     * (optional, default is `false`).
+     */
+    autofocus: {
+      type: Boolean,
+      required: false,
+      default () {
+        return false
+      }
     }
   },
   mounted () {
@@ -130,6 +141,14 @@ export default {
         if (savedValue && !this.srcContent) {
           this.$refs.trix.editor.loadJSON(JSON.parse(savedValue))
         }
+      }
+
+      /**
+       * If autofocus is true, manually set focus to
+       * beginning of content (consistent with Trix behavior)
+       */
+      if (this.autofocus) {
+        this.$refs.trix.editor.setSelectedRange(0)
       }
     })
   },
