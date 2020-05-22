@@ -4,6 +4,7 @@
       <h2>1. A simple text editor</h2>
       <VueTrix
         localStorage
+        autofocus
         v-model="content1"
         placeholder="Enter your content"
         @trix-file-accept="handleFile"
