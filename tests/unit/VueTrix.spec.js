@@ -26,7 +26,8 @@ describe('VueTrix.vue', () => {
       inputName: 'content',
       placeholder: 'placeholder',
       srcContent: 'srcContent',
-      localStorage: true
+      localStorage: true,
+      autofocus: true
     }
 
     const wrapper = shallowMount(VueTrix, { propsData })
