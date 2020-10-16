@@ -74,7 +74,7 @@
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-uglify": "^6.0.2",
     "rollup-plugin-vue": "^5.1.9",
-    "sass-loader": "^9.0.3",
+    "sass-loader": "^10.0.3",
     "uglify-es": "^3.3.9",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
