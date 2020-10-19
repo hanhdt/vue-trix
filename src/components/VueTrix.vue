@@ -238,8 +238,6 @@ export default {
     },
     overrideConfig (config) {
       Trix.config = this.deepMerge(Trix.config, config)
-      // eslint-disable-next-line
-      console.log('config override')
     },
     deepMerge (target, override) {
       // deep merge the object into the target object
