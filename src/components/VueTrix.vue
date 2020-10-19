@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import 'trix'
+import Trix from 'trix'
 import 'trix/dist/trix.css'
 import EmitFileAccept from '../mixins/EmitFileAccept.js'
 import EmitInitialize from '../mixins/EmitInitialize.js'
@@ -126,9 +126,21 @@ export default {
       default () {
         return false
       }
+    },
+    /**
+     * Object to override default editor configuration
+     */
+    config: {
+      type: Object,
+      required: false,
+      default () {
+        return {}
+      }
     }
   },
   mounted () {
+    /** Override editor configuration */
+    this.overrideConfig(this.config)
     /** Check if editor read-only mode is required */
     this.decorateDisabledEditor(this.disabledEditor)
     this.$nextTick(() => {
@@ -223,6 +235,27 @@ export default {
         this.$refs.trix.style['pointer-events'] = 'unset'
         this.$refs.trix.style['background'] = 'transparent'
       }
+    },
+    overrideConfig (config) {
+      Trix.config = this.deepMerge(Trix.config, config)
+      // eslint-disable-next-line
+      console.log('config override')
+    },
+    deepMerge (target, override) {
+      // deep merge the object into the target object
+      for (let prop in override) {
+        if (override.hasOwnProperty(prop)) {
+          if (Object.prototype.toString.call(override[prop]) === '[object Object]') {
+            // if the property is a nested object
+            target[prop] = this.deepMerge(target[prop], override[prop])
+          } else {
+            // for regular property
+            target[prop] = override[prop]
+          }
+        }
+      }
+
+      return target
     }
   },
   computed: {
@@ -256,6 +289,10 @@ export default {
     },
     isDisabled: {
       handler: 'decorateDisabledEditor'
+    },
+    config: {
+      handler: 'overrideConfig',
+      deep: true
     }
   }
 }
