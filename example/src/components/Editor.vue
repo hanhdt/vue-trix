@@ -38,6 +38,21 @@
         @trix-blur="handleEditorBlur"
       />
     </div>
+    <hr>
+    <div class="editor-wrapper">
+      <h2>4. Override default configuration</h2>
+      <VueTrix
+        localStorage
+        v-model="content4"
+        placeholder="Enter your content"
+        :config="editor4Config"
+        @trix-file-accept="handleFile"
+        @trix-attachment-add="handleAttachmentAdd"
+        @trix-attachment-remove="handleAttachmentRemove"
+        @trix-focus="handleEditorFocus"
+        @trix-blur="handleEditorBlur"
+      />
+    </div>
   </div>
 </template>
 
@@ -61,7 +76,18 @@ export default {
       content1: '<h1>here is heading</h1>',
       content2: '<blockquote>description content</blockquote>',
       content3: '<h1>Hello world!</h1>',
-      disableEditor: true
+      content4: '<h1>Disabled attachments captions</h1>',
+      disableEditor: true,
+      editor4Config: {
+        attachments: {
+          preview: {
+            caption: {
+              name: false,
+              size: false
+            }
+          }
+        }
+      }
     }
   },
   methods: {
