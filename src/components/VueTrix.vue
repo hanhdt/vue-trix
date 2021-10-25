@@ -11,6 +11,7 @@
       @trix-attachment-add="emitAttachmentAdd"
       @trix-attachment-remove="emitAttachmentRemove"
       @trix-selection-change="emitSelectionChange"
+      @trix-action-invoke="emitActionInvoke"
       @trix-initialize="handleInitialize"
       @trix-before-initialize="emitBeforeInitialize"
       @trix-focus="processTrixFocus"
@@ -34,6 +35,7 @@ import EmitAttachmentAdd from '../mixins/EmitAttachmentAdd.js'
 import EmitSelectionChange from '../mixins/EmitSelectionChange.js'
 import EmitAttachmentRemove from '../mixins/EmitAttachmentRemove.js'
 import EmitBeforeInitialize from '../mixins/EmitBeforeInitialize.js'
+import EmitActionInvoke from '../mixins/EmitActionInvoke.js'
 import ProcessEditorFocusAndBlur from '../mixins/ProcessEditorFocusAndBlur.js'
 
 export default {
@@ -45,6 +47,7 @@ export default {
     EmitSelectionChange(),
     EmitAttachmentRemove(),
     EmitBeforeInitialize(),
+    EmitActionInvoke(),
     ProcessEditorFocusAndBlur()
   ],
   model: {
