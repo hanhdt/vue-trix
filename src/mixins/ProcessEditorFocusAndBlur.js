@@ -3,13 +3,13 @@ export default function (component) {
     methods: {
       processTrixFocus (event) {
         if (this.$refs.trix) {
-          this.isActived = true
+          this.isActivated = true
           this.$emit('trix-focus', this.$refs.trix.editor, event)
         }
       },
       processTrixBlur (event) {
         if (this.$refs.trix) {
-          this.isActived = false
+          this.isActivated = false
           this.$emit('trix-blur', this.$refs.trix.editor, event)
         }
       }
