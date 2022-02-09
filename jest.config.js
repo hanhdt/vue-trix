@@ -4,16 +4,16 @@ module.exports = {
     'json',
     'vue'
   ],
+  testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.vue$': 'vue-jest',
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-    '^.+\\.jsx?$': 'babel-jest'
+    "^.+\\.vue$": "vue-jest",
+    "^.+\\js$": "babel-jest"
   },
   transformIgnorePatterns: [
     '/node_modules/.*'
   ],
   moduleNameMapper: {
-    '^vue$': 'vue/dist/vue.common.js',
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss)$': 'identity-obj-proxy'
   },
@@ -31,5 +31,6 @@ module.exports = {
     '!**/node_modules/**',
     '!src/index.js',
     '!src/mixins/**'
-  ]
+  ],
+  globals: {},
 }

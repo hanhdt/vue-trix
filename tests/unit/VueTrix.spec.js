@@ -21,7 +21,7 @@ describe('VueTrix.vue', () => {
   })
 
   it('has initial props', () => {
-    const propsData = {
+    const props = {
       inputId: 'inputId',
       inputName: 'content',
       placeholder: 'placeholder',
@@ -30,17 +30,17 @@ describe('VueTrix.vue', () => {
       autofocus: true
     }
 
-    const wrapper = shallowMount(VueTrix, { propsData })
+    const wrapper = shallowMount(VueTrix, { props })
 
     // assert component props correctly
-    Object.keys(propsData).forEach(key => {
-      expect(wrapper.props()[key]).toBe(propsData[key])
+    Object.keys(props).forEach(key => {
+      expect(wrapper.props()[key]).toBe(props[key])
     })
   })
 
   it('has valid hidden input', () => {
     const wrapper = mount(VueTrix, {
-      propsData: {
+      props: {
         inputId: 'inputId',
         inputName: 'content',
         srcContent: 'srcContent',
@@ -60,7 +60,7 @@ describe('VueTrix.vue', () => {
 
   it('has valid trix-editor attributes', () => {
     const wrapper = mount(VueTrix, {
-      propsData: {
+      props: {
         inputId: 'inputId',
         inputName: 'content',
         initContent: 'initContent',
@@ -79,7 +79,7 @@ describe('VueTrix.vue', () => {
 
   it('works with v-model directive', () => {
     const wrapper = mount(VueTrix, {
-      propsData: {
+      props: {
         srcContent: 'init content'
       }
     })
