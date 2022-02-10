@@ -7,7 +7,11 @@ module.exports = {
   testEnvironment: 'jsdom',
   transform: {
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-    "^.+\\.vue$": "vue-jest",
+    "^.+\\.vue$": ["vue-jest", {
+      compilerOptions: {
+        isCustomElement: tag => tag === 'trix-editor'
+      }
+    }],
     "^.+\\js$": "babel-jest"
   },
   transformIgnorePatterns: [

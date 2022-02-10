@@ -15,6 +15,7 @@ const VueTrixPlugin = {
     if (!options) {
       options = {};
     }
+    app.config.compilerOptions.isCustomElement = tag => tag === 'trix-editor'
     app.component('vue-trix', VueTrix);
   }
 };
