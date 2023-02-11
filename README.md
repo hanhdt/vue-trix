@@ -53,19 +53,19 @@ Simple and lightweight [Trix](https://www.npmjs.com/package/trix) rich-text edit
 ### NPM
 
 ```Shell
-  $npm install --save vue-trix
+  npm install --save vue-trix
 ```
 
 ### YARN
 
 ```Shell
-  $yarn add vue-trix
+  yarn add vue-trix
 ```
 
 ### Or directly from latest Github repo
 
 ```Shell
-  $npm install --save hanhdt/vue-trix
+  npm install --save hanhdt/vue-trix
 ```
 
 ## Mount
