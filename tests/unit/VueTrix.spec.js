@@ -94,4 +94,23 @@ describe('VueTrix.vue', () => {
     wrapper.setProps({ srcContent: 'new content' })
     expect(wrapper.vm.initialContent).toEqual('new content')
   })
+  
+    it('overrides config', () => {
+    const propsData = {
+                        config: {  
+                          blockAttributes: { 
+                            heading2:  {
+                              tagName: 'h2',
+                              terminal: true,
+                              breakOnReturn: true,
+                              group: false
+                       }}}}
+
+
+    const wrapper = shallowMount(VueTrix, { propsData })
+
+    // assert component props correctly
+    expect(wrapper.props().config.blockAttributes.heading2.tagName).toBe('h2')
+  })
+
 })
