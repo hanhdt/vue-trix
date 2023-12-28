@@ -96,7 +96,7 @@ export default {
       }
     },
     /**
-     * The source content is associcated to v-model directive.
+     * The source content is associated to v-model directive.
      */
     srcContent: {
       type: String,
@@ -159,7 +159,7 @@ export default {
   data () {
     return {
       editorContent: this.srcContent,
-      isActived: null
+      isActivated: null
     }
   },
   methods: {
@@ -189,7 +189,7 @@ export default {
          *  If user are typing, then don't reload the editor,
          *  hence keep cursor's position after typing.
          */
-        if (!this.isActived) {
+        if (!this.isActivated) {
           this.reloadEditorContent(this.editorContent)
         }
       }
